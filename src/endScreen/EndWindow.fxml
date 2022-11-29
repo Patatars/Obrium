@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="531.0" maxWidth="866.0" prefHeight="400.0" prefWidth="800.0" style="-fx-background-color: #131313;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="endScreen.EndWindow">
+   <Label alignment="CENTER" contentDisplay="CENTER" layoutX="28.0" layoutY="40.0" prefHeight="62.0" prefWidth="584.0" text="Вы прошли" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
+      <font>
+         <Font name="Franklin Gothic Medium" size="53.0" />
+      </font>
+   </Label>
+   <Label fx:id="success" alignment="CENTER" contentDisplay="CENTER" layoutY="129.0" prefHeight="140.0" prefWidth="800.0" text="Данные о прохождении этого задаения были успешно сохранены" textAlignment="CENTER" textFill="WHITE" AnchorPane.bottomAnchor="119.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="141.0">
+   <font>
+      <Font name="Franklin Gothic Medium" size="37.0" />
+   </font>
+   </Label>
+   <StackPane layoutY="308.0" prefHeight="62.0" prefWidth="610.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+      <Button alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#ToHomePage" prefHeight="40.0" prefWidth="173.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 6; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-insets: 0; -fx-background-radius: 8;" text="На главную" textFill="WHITE" StackPane.alignment="CENTER">
+         <effect>
+            <Glow level="0.37" />
+         </effect>
+      </Button>
+   </StackPane>
+</AnchorPane>

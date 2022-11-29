@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="490.0" prefWidth="915.0" style="-fx-background-color: #131313;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="auth.Auth">
+     <bottom>
+         <CheckBox fx:id="saveAuthData" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" minWidth="-Infinity" mnemonicParsing="false" selected="true" text="Не выходить из аккаунта" textAlignment="CENTER" textFill="WHITE" BorderPane.alignment="CENTER">
+             <font>
+                 <Font name="Times New Roman" size="30.0" />
+             </font>
+         <BorderPane.margin>
+            <Insets bottom="10.0" />
+         </BorderPane.margin>
+         </CheckBox>
+     </bottom>
+     <top>
+       <Label fx:id="label" alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" style="-fx-font-family: Lilita2;" text="Образовательный минимум" textAlignment="CENTER">
+           <textFill>
+               <LinearGradient endX="0.5142857142857142" endY="0.680952380952381" startX="0.5142857142857143" startY="0.38571428571428573">
+                   <stops>
+                       <Stop>
+                           <color>
+                               <Color red="0.5921052694320679" green="0.3552631437778473" blue="0.9473684430122375" />
+                           </color>
+                       </Stop>
+                       <Stop offset="1.0">
+                           <color>
+                               <Color red="0.14351852238178253" green="0.28626543283462524" blue="1.0" />
+                           </color>
+                       </Stop>
+                   </stops>
+               </LinearGradient>
+           </textFill>
+           <font>
+               <Font name="Chiller" size="54.0" />
+           </font>
+           <effect>
+               <Glow level="0.62" />
+           </effect>
+           <BorderPane.margin>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+           </BorderPane.margin>
+       </Label>
+     </top>
+   <center>
+       <VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" prefHeight="294.0" prefWidth="797.0" spacing="10.0" style="-fx-background-color: #131313;">
+           <TextField fx:id="login" prefHeight="29.0" prefWidth="885.0" promptText="Логин" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 4; -fx-background-radius: 4; -fx-prompt-text-fill: #d0d0d0; -fx-text-fill: white;" stylesheets="@../sources/styles.css">
+               <VBox.margin>
+                   <Insets bottom="20.0" left="40.0" right="40.0" top="20.0" />
+               </VBox.margin>
+           </TextField>
+           <PasswordField fx:id="password" prefHeight="15.0" prefWidth="964.0" promptText="Пароль" style="-fx-background-color: black; -fx-border-color: white; -fx-border-width: 2; -fx-border-radius: 4; -fx-background-radius: 4; -fx-prompt-text-fill: #d0d0d0; -fx-text-fill: white;"  stylesheets="@../sources/styles.css">
+               <VBox.margin>
+                   <Insets bottom="20.0" left="40.0" right="40.0" />
+               </VBox.margin>
+           </PasswordField>
+           <Text fx:id="wrong" fill="RED" stroke="WHITE" strokeType="OUTSIDE" strokeWidth="0.1" style="-fx-font-weight: bold;" text="НЕВЕРНЫЙ ЛОГИН ИЛИ ПАРОЛЬ" textAlignment="CENTER" visible="false">
+               <font>
+                   <Font size="18.0" />
+               </font>
+           </Text>
+           <Button alignment="CENTER" contentDisplay="BOTTOM" maxHeight="1.7976931348623157E308" maxWidth="-Infinity" mnemonicParsing="false" onAction="#logIn" styleClass="btn-primary" stylesheets="@../sources/styles.css" text="Войти" textAlignment="CENTER">
+               <VBox.margin>
+                   <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+               </VBox.margin>
+           </Button>
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+       </VBox>
+   </center>
+ </BorderPane>

@@ -1,0 +1,39 @@
+.text-area {
+    -fx-text-fill: #ffffff;
+    -fx-font-size: 20;
+    -fx-background-color: #5e5d5d;
+
+}
+
+.text-area:focused{
+    -fx-background-color: linear-gradient(from 51.4286% 38.5714% to 51.4286% 68.0952%, #975bf2 0.0%,#2549ff 100.0%);
+}
+.text-area .content {
+    -fx-background-color: black;
+    -fx-background-radius: 0 ;
+}
+/*.text-area .scroll-bar:vertical {*/
+/*    -fx-pref-width: 1;*/
+/*    -fx-opacity: 0;*/
+/*}*/
+
+ .scroll-bar:vertical{
+    -fx-background-color: black;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track{
+    -fx-background-color: black;
+    -fx-border-color: black;
+    -fx-background-radius: 0em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #868686;
+    -fx-background-radius: 5em;
+}

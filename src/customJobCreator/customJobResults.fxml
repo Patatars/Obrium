@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="812.0" prefWidth="1459.0" style="-fx-background-color: #131313;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="customJobCreator.CustomJobResults">
+    <Label fx:id="File_Name" alignment="CENTER" layoutY="14.0" prefHeight="61.0" prefWidth="354.0" text="PrettyName" textFill="WHITE" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="14.0">
+        <font>
+            <Font name="System Bold" size="41.0" />
+        </font>
+    </Label>
+    <StackPane layoutY="414.0" prefHeight="59.0" prefWidth="776.0" AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="200.0">
+            <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#OneMoreTime" prefHeight="59.0" prefWidth="180.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 6; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-radius: 8; -fx-background-insets: 0;" text="Пройти работу заново" textFill="WHITE" />
+            <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" onAction="#Complete" prefHeight="59.0" prefWidth="181.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 6; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-radius: 8; -fx-background-insets: 0;" text="На главный экран" textFill="WHITE" />
+        </HBox>
+    </StackPane>
+    <Label fx:id="StartTime" layoutX="36.0" layoutY="235.0" prefHeight="61.0" prefWidth="854.0" text="Начало прохождения: 12 января 2022 года 17:25" textFill="WHITE" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="569.0" AnchorPane.topAnchor="235.0">
+        <font>
+            <Font name="System Bold" size="30.0" />
+        </font>
+    </Label>
+    <Label fx:id="EndTime" layoutX="36.0" layoutY="373.0" prefHeight="61.0" prefWidth="192.0" text="EndTime" textFill="WHITE" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="569.0" AnchorPane.topAnchor="373.0">
+        <font>
+            <Font name="System Bold" size="30.0" />
+        </font>
+    </Label>
+    <Label fx:id="DoingTime" layoutX="36.0" layoutY="517.0" prefHeight="61.0" prefWidth="192.0" text="DoingTime" textFill="WHITE" AnchorPane.leftAnchor="36.0" AnchorPane.rightAnchor="569.0" AnchorPane.topAnchor="517.0">
+        <font>
+            <Font name="System Bold" size="30.0" />
+        </font>
+    </Label>
+    <Label alignment="CENTER" layoutX="800.0" layoutY="82.0" prefHeight="61.0" prefWidth="659.0" text="Ошибок за слово:" textFill="WHITE" AnchorPane.leftAnchor="800.0" AnchorPane.rightAnchor="0.0">
+        <font>
+            <Font name="System Bold" size="41.0" />
+        </font>
+    </Label>
+    <ScrollPane fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER" layoutX="890.0" layoutY="153.0" prefHeight="469.0" prefWidth="534.0" style="-fx-background: #131313; -fx-background-color: #131313; -fx-border-width: 0;" stylesheets="@../sources/styleForSB.css" AnchorPane.bottomAnchor="98.0" AnchorPane.rightAnchor="35.0" AnchorPane.topAnchor="153.0" HBox.hgrow="ALWAYS">
+        <VBox fx:id="VBox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="467.0" prefWidth="611.0" spacing="10.0" />
+    </ScrollPane>
+</AnchorPane>
