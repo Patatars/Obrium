@@ -4,6 +4,8 @@ import Starters.Main;
 import checkWords.CheckWords;
 import classes.*;
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import initScenes.Scenes;
 import initScenes.ScenesManager;
 import javafx.event.Event;
@@ -16,6 +18,9 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import jobs.Task.TextFieldTask.TextFieldTask;
+import jobs.Task.baseTask;
+import jobs.Work.learnWork.learnJob;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -36,6 +41,7 @@ public class HomePage implements CallableFromScenesManager {
     public Button reloadBut;
     public TabPane TabPane;
     public Tab AllJobsPassed = new Tab("Все работы пройдёны");
+    public AnchorPane parent;
 
 
     /**
@@ -174,10 +180,23 @@ public class HomePage implements CallableFromScenesManager {
         if(answer.contains("ERROR:::")) {
             return;
         }
-        Gson g = new Gson();
-        FileData fileData = g.fromJson(answer, FileData.class);
-        fileData.CompleteFileData();
-        CheckWords.fileData = fileData;
+        answer = "{\"version\":1,\"tasks\" :  [\n" +
+                "  {\n" +
+                "    \"type\" : \"TextFieldTask\",\n" +
+                "    \"task\" : \"123\",\n" +
+                "    \"answer\" : \"123\",\n" +
+                "    \"repeats\" : 2\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"type\" : \"TextFieldTask\",\n" +
+                "    \"task\" : \"228\",\n" +
+                "    \"answer\" : \"228\",\n" +
+                "    \"repeats\" : 2\n" +
+                "  }\n" +
+                "]}";
+        RuntimeTypeAdapterFactory<baseTask> typeFactory = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class);
+        Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactory).create();
+        CheckWords.job = g.fromJson(answer, learnJob.class);
         ScenesManager.setScene(Main.primaryStage, Scenes.checkWords);
 
     }

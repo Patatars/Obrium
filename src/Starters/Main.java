@@ -1,11 +1,7 @@
 package Starters;
 
 import auth.Auth;
-import classes.HTTPRequests;
-import classes.URLs;
-import classes.UserData;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
+import com.cyberes.Property.UpdateManager;
 import initScenes.Scenes;
 import initScenes.ScenesManager;
 import javafx.application.Application;
@@ -15,9 +11,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URLDecoder;
-import java.util.Map;
 import java.util.Properties;
-import com.cyberes.Property.UpdateManager;
 
 public class Main extends Application {
     public static Stage primaryStage;

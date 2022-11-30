@@ -19,7 +19,7 @@ public class CustomJobCreator implements CallableFromScenesManager {
         Gson g = new Gson();
         FileData fileData = g.fromJson(json.getText(), FileData.class);
         fileData.CompleteFileData();
-        CheckWords.fileData = fileData;
+        //CheckWords.fileData = fileData;
         ScenesManager.setScene(Main.primaryStage, Scenes.checkWords);
     }
 

@@ -1,0 +1,14 @@
+{"version":1,"tasks" :  [
+  {
+    "type" : "TextFieldTask",
+    "task" : "123",
+    "answer" : "123",
+    "repeats" : 2
+  },
+  {
+    "type" : "TextFieldTask",
+    "task" : "228",
+    "answer" : "228",
+    "repeats" : 2
+  }
+]}

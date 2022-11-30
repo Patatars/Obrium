@@ -6,7 +6,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="516.0" prefWidth="658.0" style="-fx-background-color: #282828;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="homePage.HomePage">
+<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="516.0" prefWidth="658.0" style="-fx-background-color: #282828;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="homePage.HomePage">
 <Button disable="true" layoutX="50.0" layoutY="116.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="185.0" text="Начать" visible="false" />
 <Button disable="true" layoutX="50.0" layoutY="225.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="185.0" text="Загрузить из файла" visible="false" />
     <TabPane fx:id="TabPane" layoutX="26.0" layoutY="89.0" prefHeight="523.0" prefWidth="670.0" rotateGraphic="true" stylesheets="@../sources/Tab-pane.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="25.0" tabMinHeight="10.0" tabMinWidth="20.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="89.0" />
