@@ -17,25 +17,19 @@ import java.io.IOException;
 
 public class TextFieldTask extends baseTask {
 
-//    private final Label taskLabel;
-//    private final TextField answerField;
     public String answer;
 
-    private final transient Label taskLabel;
+
     private final transient TextField answerTextField;
 
     public TextFieldTask() throws IOException {
         super(FXMLLoader.load(TextFieldTask.class.getResource("TextFieldTask.fxml")));
-        taskLabel = (Label)(super.taskPane.lookup("#Task"));
         answerTextField = (TextField) (super.taskPane.lookup("#Answer"));
-        Button doneButton = (Button) (super.taskPane.lookup("#Done"));
-        doneButton.setOnAction(this::OnAnswer);
         answerTextField.setOnAction(this::OnAnswer);
     }
     @Override
     protected void initialize() {
-        taskLabel.setText(task);
-        taskLabel.setFont(new Font(fontSize));
+
     }
     @Override
     public void OnAnswerEvent(ActionEvent actionEvent) {

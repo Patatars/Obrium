@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import jobs.Task.RadioTask.RadioTask;
 import jobs.Task.TextFieldTask.TextFieldTask;
 import jobs.Task.baseTask;
 import jobs.Work.baseJob;
@@ -189,13 +190,13 @@ public class HomePage implements CallableFromScenesManager {
                 "    \"repeats\" : 2\n" +
                 "  },\n" +
                 "  {\n" +
-                "    \"type\" : \"TextFieldTask\",\n" +
-                "    \"task\" : \"228\",\n" +
-                "    \"answer\" : \"228\",\n" +
+                "    \"type\" : \"RadioTask\",\n" +
+                "    \"task\" : \"Выберите верный ответ\",\n" +
+                "    \"answers\" : [\"22elkgerlhgerklhjretjhirtjhiotrjihojrthijrtiojhiortjhoijrtiohjrtoijhoirtjhoirtjhoijrtiohjoritjhoirtjhoirjtiohjoritjhoirtj8\", \"777\", \"666\"],\n" +
                 "    \"repeats\" : 2\n" +
                 "  }\n" +
                 "]}";
-        RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class);
+        RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class).registerSubtype(RadioTask.class);
         RuntimeTypeAdapterFactory<baseJob> typeFactoryJob = RuntimeTypeAdapterFactory.of(baseJob.class, "type").registerSubtype(learnJob.class);
         Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactoryTask).registerTypeAdapterFactory(typeFactoryJob).create();
         CheckWords.job = g.fromJson(answer, learnJob.class);

@@ -3,10 +3,12 @@ package jobs.Task;
 import Starters.Main;
 import checkWords.CheckWords;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 
 
 public abstract class baseTask {
@@ -17,12 +19,14 @@ public abstract class baseTask {
     public enum State{
         CORRECT,
         INCORRECT,
-        COMPLETE
+        COMPLETE,
+        EMPTY
     }
-    public transient State state;
+    public transient State state = State.EMPTY;
 
     public static transient CheckWords controller;
 
+    protected final transient Label taskLabel;
     protected transient Pane taskPane;
     protected transient String shortTask;
     protected transient int fontSize = 52;
@@ -30,13 +34,16 @@ public abstract class baseTask {
     protected transient int points = 0;
     protected transient HBox history;
 
+    public baseTask(Pane root){
+        taskPane = root;
+        taskLabel = (Label)(taskPane.lookup("#Task"));
+        ((Button) (taskPane.lookup("#Done"))).setOnAction(this::OnAnswer);
+    }
+
     public void setHistory(HBox history) {
         this.history = history;
     }
 
-    public baseTask(Pane root){
-        taskPane = root;
-    }
     private boolean wasShown;
     public void show(Pane parent, Label pointsLabel){
         if (!wasShown){
@@ -68,6 +75,8 @@ public abstract class baseTask {
         } else {
             fontSize = 35;
         }
+        taskLabel.setText(task);
+        taskLabel.setFont(new Font(fontSize));
         initialize();
     }
 

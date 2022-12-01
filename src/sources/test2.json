@@ -1,0 +1,14 @@
+{"version":1, "type": "learnJob", "name" :  "228", "filename" :  "f", "item" :  "fe","tasks" :  [
+  {
+    "type" : "TextFieldTask",
+    "task" : "123",
+    "answer" : "123",
+    "repeats" : 2
+  },
+  {
+    "type" : "RadioTask",
+    "task" : "Выберите верный ответ",
+    "answer" : ["228", "777", "666"],
+    "repeats" : 2
+  }
+]}
