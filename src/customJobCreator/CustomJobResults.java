@@ -11,6 +11,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import jobs.Work.learnWork.learnJob;
 
 import java.io.IOException;
 import java.sql.Time;
@@ -27,7 +28,7 @@ public class CustomJobResults implements CallableFromScenesManager {
     public Label EndTime;
     public Label DoingTime;
     public javafx.scene.layout.VBox VBox;
-    public static FileData info;
+    public static learnJob info;
 
     @Override
     public void init(boolean firstShowing) {
@@ -42,30 +43,30 @@ public class CustomJobResults implements CallableFromScenesManager {
         EndTime.setText("Конец прохождения: " + simpleDateFormat.format(date));
         long doingTime = endTime - startTime;
         DoingTime.setText("Время прохождения: " + new Time(doingTime - 10800000));
-        Stream<Map.Entry<String,Integer>> sorted = info.mistakes.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()));
-        sorted.forEach(stringIntegerEntry -> {
-            String s = stringIntegerEntry.getKey();
-            Tooltip tooltip = null;
-            if(stringIntegerEntry.getKey().length() > 23) {
-                s = s.replaceAll("(.{23})", "$1\n");
-                tooltip = new Tooltip(s);
-                tooltip.setFont(new Font(20));
-
-                s = s.substring(0, 20) + "...";
-
-            }
-            Label label = new Label(s + ": " + stringIntegerEntry.getValue());
-            label.setTooltip(tooltip);
-            label.setTextFill(Color.WHITE);
-            label.setFont(new Font(30));
-            label.setMaxWidth(Double.MAX_VALUE);
-            label.setAlignment(Pos.CENTER);
-            VBox.getChildren().add(label);
-        });
+        //Stream<Map.Entry<String,Integer>> sorted = info.mistakes.entrySet().stream().sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()));
+//        sorted.forEach(stringIntegerEntry -> {
+//            String s = stringIntegerEntry.getKey();
+//            Tooltip tooltip = null;
+//            if(stringIntegerEntry.getKey().length() > 23) {
+//                s = s.replaceAll("(.{23})", "$1\n");
+//                tooltip = new Tooltip(s);
+//                tooltip.setFont(new Font(20));
+//
+//                s = s.substring(0, 20) + "...";
+//
+//            }
+//            Label label = new Label(s + ": " + stringIntegerEntry.getValue());
+//            label.setTooltip(tooltip);
+//            label.setTextFill(Color.WHITE);
+//            label.setFont(new Font(30));
+//            label.setMaxWidth(Double.MAX_VALUE);
+//            label.setAlignment(Pos.CENTER);
+//            VBox.getChildren().add(label);
+//        });
     }
 
     public void OneMoreTime(ActionEvent actionEvent) throws IOException {
-        Arrays.fill(info.points, 0);
+        //Arrays.fill(info.points, 0);
         ScenesManager.setScene(Main.primaryStage, Scenes.checkWords);
 
     }

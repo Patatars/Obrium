@@ -6,23 +6,18 @@
 <?import javafx.scene.text.*?>
 
 <VBox fx:id="TaskContainer" alignment="CENTER" spacing="30.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
-   <Label fx:id="Word" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="КИПМШГНУКТИМОЛВАРМШУКГЩРТМОЛАВРПЛОУКАТПАОЛВРПЛДВ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
+   <Label fx:id="Task" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="КИПМШГНУКТИМОЛВАРМШУКГЩРТМОЛАВРПЛОУКАТПАОЛВРПЛДВ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
       <font>
          <Font size="52.0" />
       </font>
    </Label>
-   <TextField fx:id="Answer" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" stylesheets="@../../../sources/TextField.css" minHeight="-Infinity" prefHeight="78.0" prefWidth="815.0" promptText="Ответ">
+   <TextField fx:id="Answer" alignment="BASELINE_LEFT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="78.0" prefWidth="815.0" promptText="Ответ" stylesheets="@../../../sources/TextField.css">
       <font>
          <Font size="17.0" />
       </font>
    </TextField>
-   <Label fx:id="Points" alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="109.0" text="{число} баллов из {число}" textAlignment="CENTER" textFill="WHITE">
-      <font>
-         <Font size="28.0" />
-      </font>
-   </Label>
    <StackPane prefHeight="51.0" prefWidth="948.0">
-      <Button maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 4; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-insets: 0; -fx-background-radius: 8;" text="Проверить" textFill="WHITE">
+      <Button fx:id="Done" maxHeight="1.7976931348623157E308" mnemonicParsing="false" prefHeight="34.0" prefWidth="143.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 4; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-insets: 0; -fx-background-radius: 8;" text="Проверить" textFill="WHITE">
          <effect>
             <Glow level="0.37" />
          </effect>

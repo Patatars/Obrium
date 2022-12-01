@@ -20,6 +20,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import jobs.Task.TextFieldTask.TextFieldTask;
 import jobs.Task.baseTask;
+import jobs.Work.baseJob;
 import jobs.Work.learnWork.learnJob;
 
 import java.io.File;
@@ -180,7 +181,7 @@ public class HomePage implements CallableFromScenesManager {
         if(answer.contains("ERROR:::")) {
             return;
         }
-        answer = "{\"version\":1,\"tasks\" :  [\n" +
+        answer = "{\"version\":1, \"type\": \"learnJob\", \"name\" :  \"228\", \"filename\" :  \"f\", \"item\" :  \"fe\",\"tasks\" :  [\n" +
                 "  {\n" +
                 "    \"type\" : \"TextFieldTask\",\n" +
                 "    \"task\" : \"123\",\n" +
@@ -194,8 +195,9 @@ public class HomePage implements CallableFromScenesManager {
                 "    \"repeats\" : 2\n" +
                 "  }\n" +
                 "]}";
-        RuntimeTypeAdapterFactory<baseTask> typeFactory = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class);
-        Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactory).create();
+        RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class);
+        RuntimeTypeAdapterFactory<baseJob> typeFactoryJob = RuntimeTypeAdapterFactory.of(baseJob.class, "type").registerSubtype(learnJob.class);
+        Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactoryTask).registerTypeAdapterFactory(typeFactoryJob).create();
         CheckWords.job = g.fromJson(answer, learnJob.class);
         ScenesManager.setScene(Main.primaryStage, Scenes.checkWords);
 
