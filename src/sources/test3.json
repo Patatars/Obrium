@@ -18,5 +18,14 @@
     "answers" : ["228", "777", "666"],
     "correctAnswers" : ["правеьный атвет1", "правеьный атвет2", "правеьный атвет3", "правеьный атвет4"],
     "repeats" : 2
+  },
+  {
+    "type" : "InsertWordTask",
+    "task" : "123",
+    "firstPartTask" : "123",
+    "secondPartTask" : "789",
+    "answer" : "456",
+    "repeats" : 2
   }
-]}
+  ]
+}

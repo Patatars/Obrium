@@ -19,6 +19,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import jobs.Task.CheckBoxTask.CheckBoxTask;
+import jobs.Task.InsertWordTask.InsertWordTask;
 import jobs.Task.RadioTask.RadioTask;
 import jobs.Task.TextFieldTask.TextFieldTask;
 import jobs.Task.baseTask;
@@ -203,9 +204,18 @@ public class HomePage implements CallableFromScenesManager {
                 "    \"answers\" : [\"228\", \"777\", \"666\"],\n" +
                 "    \"correctAnswers\" : [\"правеьный атвет1\", \"правеьный атвет2\", \"правеьный атвет3\", \"правеьный атвет4\"],\n" +
                 "    \"repeats\" : 2\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"type\" : \"InsertWordTask\",\n" +
+                "    \"task\" : \"123\",\n" +
+                "    \"firstPartTask\" : \"123\",\n" +
+                "    \"secondPartTask\" : \"789\",\n" +
+                "    \"answer\" : \"456\",\n" +
+                "    \"repeats\" : 2\n" +
                 "  }\n" +
-                "]}";
-        RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class).registerSubtype(RadioTask.class).registerSubtype(CheckBoxTask.class);
+                "  ]\n" +
+                "}";
+        RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class).registerSubtype(RadioTask.class).registerSubtype(CheckBoxTask.class).registerSubtype(InsertWordTask.class);
         RuntimeTypeAdapterFactory<baseJob> typeFactoryJob = RuntimeTypeAdapterFactory.of(baseJob.class, "type").registerSubtype(learnJob.class);
         Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactoryTask).registerTypeAdapterFactory(typeFactoryJob).create();
         CheckWords.job = g.fromJson(answer, learnJob.class);
