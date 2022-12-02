@@ -38,7 +38,7 @@ public class CheckWords implements CallableFromScenesManager {
 
 
 
-    final static Random random = new Random();
+    public final static Random random = new Random();
 
     VBox cont = new VBox();
 

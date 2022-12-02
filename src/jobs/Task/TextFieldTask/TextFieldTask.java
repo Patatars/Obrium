@@ -27,32 +27,14 @@ public class TextFieldTask extends baseTask {
         answerTextField = (TextField) (super.taskPane.lookup("#Answer"));
         answerTextField.setOnAction(this::OnAnswer);
     }
-    @Override
-    protected void initialize() {
-
-    }
-    @Override
-    public void OnAnswerEvent(ActionEvent actionEvent) {
+    public void OnAnswer(ActionEvent actionEvent) {
         if(answerTextField.getText().trim().equals("")) return;
         if(answerTextField.getText().trim().toLowerCase().equals(answer.toLowerCase())){
-            points++;
-            answerTextField.setText("");
-            state = points == repeats ? State.COMPLETE : State.CORRECT;
+            CorrectAnswer();
         } else {
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.initOwner(Main.primaryStage);
-            a.getDialogPane().getStylesheets().add("sources/Dialog.css");
-            String contentText = answerTextField.getText().length() > 50 ? answerTextField.getText().substring(0, 50) + "..." : answerTextField.getText();
-            a.setContentText("Вы написали: " + contentText);
-            a.setTitle("Неверный ответ");
-            a.setHeaderText("Правильный ответ: " + answer);
-            a.showAndWait();
-            points = 0;
-            state = State.INCORRECT;
-            mistakes++;
+            WrongAnswer(answerTextField.getText(), answer);
         }
         answerTextField.setText("");
-
 
     }
 

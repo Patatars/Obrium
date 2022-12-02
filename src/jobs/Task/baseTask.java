@@ -2,13 +2,20 @@ package jobs.Task;
 
 import Starters.Main;
 import checkWords.CheckWords;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.Toggle;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+
+import java.util.Collections;
+import java.util.List;
 
 
 public abstract class baseTask {
@@ -34,20 +41,23 @@ public abstract class baseTask {
     protected transient int points = 0;
     protected transient HBox history;
 
+    private boolean wasShown;
+
     public baseTask(Pane root){
         taskPane = root;
         taskLabel = (Label)(taskPane.lookup("#Task"));
         ((Button) (taskPane.lookup("#Done"))).setOnAction(this::OnAnswer);
     }
 
+    protected abstract void OnAnswer(ActionEvent actionEvent);
+
     public void setHistory(HBox history) {
         this.history = history;
     }
-
-    private boolean wasShown;
+    
     public void show(Pane parent, Label pointsLabel){
         if (!wasShown){
-            init();
+            initialize();
             wasShown = true;
         }
         history.getChildren().forEach(node -> node.setStyle("-fx-font-weight: bolder; -fx-font-style: italic; -fx-font-size: 30"));
@@ -55,9 +65,8 @@ public abstract class baseTask {
         parent.getChildren().clear();
         parent.getChildren().add(taskPane);
     }
-    protected abstract void initialize();
 
-    private void init(){
+    protected void initialize(){
         int letters = task.length();
         if(letters>13){
             shortTask = task.substring(0, 13) + "...";
@@ -77,7 +86,6 @@ public abstract class baseTask {
         }
         taskLabel.setText(task);
         taskLabel.setFont(new Font(fontSize));
-        initialize();
     }
 
     protected void MarkCorrectWord(HBox pane , baseTask.State state){
@@ -97,13 +105,29 @@ public abstract class baseTask {
 
         }
     }
-
-    protected void OnAnswer(ActionEvent actionEvent){
+    protected void CorrectAnswer(){
+        points++;
+        state = points == repeats ? State.COMPLETE : State.CORRECT;
+        Answered();
+    }
+    protected void WrongAnswer(String answer, String correctAnswer){
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.initOwner(Main.primaryStage);
+        a.getDialogPane().getStylesheets().add("sources/Dialog.css");
+        String contentText = answer.length() > 50 ? answer.substring(0, 50) + "..." : answer;
+        a.setContentText("Ваш ответ: " + contentText);
+        a.setTitle("Неверный ответ");
+        a.setHeaderText("Правильный ответ: " + correctAnswer);
+        a.showAndWait();
+        points = 0;
+        state = State.INCORRECT;
+        mistakes++;
+        Answered();
+    }
+    private void Answered(){
         history.getChildren().forEach(node -> node.setStyle(""));
-        OnAnswerEvent(actionEvent);
         MarkCorrectWord(history, state);
         ((Label)history.getChildren().get(1)).setText(String.valueOf(points));
         controller.randomWord();
     }
-    protected abstract void OnAnswerEvent(ActionEvent actionEvent);
 }
