@@ -1,19 +1,19 @@
-package jobs.Task.RadioTask;
+package jobs.Task.CheckBoxTask;
 
 import javafx.geometry.Pos;
-import javafx.scene.control.RadioButton;
+import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Region;
 import javafx.scene.text.Font;
 
-public class RadioButtonObrium extends RadioButton {
+public class CheckBoxObrium extends CheckBox {
     private final boolean isCorrect;
-    public RadioButtonObrium(String text, boolean isCorrectRadio){
+    public CheckBoxObrium(String text, boolean isCorrectRadio){
         super(text);
         setFont(new Font(50));
         setPrefHeight(Region.USE_COMPUTED_SIZE);
         setWrapText(true);
         setAlignment(Pos.CENTER);
-        getStylesheets().add("sources/radio.css");
+        getStylesheets().add("sources/checkBox.css");
         isCorrect = isCorrectRadio;
     }
     public boolean isCorrect() {

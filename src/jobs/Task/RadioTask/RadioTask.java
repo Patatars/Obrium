@@ -1,29 +1,24 @@
 package jobs.Task.RadioTask;
 
-import checkWords.CheckWords;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import jobs.Task.baseTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class RadioTask extends baseTask {
 
     public String[] answers;
+    public String correctAnswer;
+
     private final transient ToggleGroup radios = new ToggleGroup();
     private final transient List<RadioButtonObrium> radioButtonsList = new ArrayList<>();
     private final transient VBox radioContainer;
@@ -36,11 +31,11 @@ public class RadioTask extends baseTask {
     @Override
     protected void initialize() {
         super.initialize();
-        RadioButtonObrium correctRadioButton = new RadioButtonObrium(answers[0], true);
+        RadioButtonObrium correctRadioButton = new RadioButtonObrium(correctAnswer, true);
         correctRadioButton.setToggleGroup(radios);
         radioButtonsList.add(correctRadioButton);
-        for (int i = 1; i<answers.length; i++) {
-            RadioButtonObrium radioButton = new RadioButtonObrium(answers[i], false);
+        for (String answer: answers) {
+            RadioButtonObrium radioButton = new RadioButtonObrium(answer, false);
             radioButton.setToggleGroup(radios);
             radioButtonsList.add(radioButton);
         }

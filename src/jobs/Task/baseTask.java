@@ -54,7 +54,7 @@ public abstract class baseTask {
     public void setHistory(HBox history) {
         this.history = history;
     }
-    
+
     public void show(Pane parent, Label pointsLabel){
         if (!wasShown){
             initialize();
@@ -123,7 +123,19 @@ public abstract class baseTask {
         state = State.INCORRECT;
         mistakes++;
         Answered();
+    }protected void WrongAnswer(String correctAnswer){
+        Alert a = new Alert(Alert.AlertType.INFORMATION);
+        a.initOwner(Main.primaryStage);
+        a.getDialogPane().getStylesheets().add("sources/Dialog.css");
+        a.setTitle("Неверный ответ");
+        a.setHeaderText("Правильный ответ: " + correctAnswer);
+        a.showAndWait();
+        points = 0;
+        state = State.INCORRECT;
+        mistakes++;
+        Answered();
     }
+
     private void Answered(){
         history.getChildren().forEach(node -> node.setStyle(""));
         MarkCorrectWord(history, state);

@@ -1,0 +1,22 @@
+{"version":1, "type": "learnJob", "name" :  "228", "filename" :  "f", "item" :  "fe","tasks" :  [
+  {
+    "type" : "TextFieldTask",
+    "task" : "123",
+    "answer" : "123",
+    "repeats" : 2
+  },
+  {
+    "type" : "RadioTask",
+    "task" : "Выберите верный ответ",
+    "answers" : ["228", "777", "666"],
+    "correctAnswer" : "правеьный атвет",
+    "repeats" : 2
+  },
+  {
+    "type" : "CheckBoxTask",
+    "task" : "Выберите верный ответ",
+    "answers" : ["228", "777", "666"],
+    "correctAnswers" : ["правеьный атвет1", "правеьный атвет2", "правеьный атвет3", "правеьный атвет4"],
+    "repeats" : 2
+  }
+]}

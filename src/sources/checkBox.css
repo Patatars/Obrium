@@ -1,23 +1,23 @@
-.radio-button{
+.check-box{
     -fx-text-fill: white;
     -fx-font-size: 30;
 
 }
-.radio-button .radio {
+.check-box .box {
     -fx-border-width: 1px;
     -fx-border-color: white;
     -fx-background-color: #131313;
     -fx-background-image: null;
-    -fx-border-radius: 15px;
+    -fx-border-radius: 2px;
     -fx-background-size: 0;
-    -fx-padding: 4px;
+    -fx-padding: 0px;
 }
-.radio-button:selected{
+.check-box:selected{
     -fx-font-weight: bold;
 }
 
-.radio-button .dot {
-    -fx-background-radius: 15px;
+.check-box .mark {
+    -fx-background-radius: 2px;
     -fx-padding: 8px;
     -fx-mark-color: #8d60ef;
     -fx-mark-highlight-color: #131313;

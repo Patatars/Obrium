@@ -18,6 +18,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import jobs.Task.CheckBoxTask.CheckBoxTask;
 import jobs.Task.RadioTask.RadioTask;
 import jobs.Task.TextFieldTask.TextFieldTask;
 import jobs.Task.baseTask;
@@ -192,11 +193,19 @@ public class HomePage implements CallableFromScenesManager {
                 "  {\n" +
                 "    \"type\" : \"RadioTask\",\n" +
                 "    \"task\" : \"Выберите верный ответ\",\n" +
-                "    \"answers\" : [\"22elkgerlhgerklhjretjhirtjhiotrjihojrthijrtiojhiortjhoijrtiohjrtoijhoirtjhoirtjhoijrtiohjoritjhoirtjhoirjtiohjoritjhoirtj8\", \"777\", \"666\"],\n" +
+                "    \"answers\" : [\"228\", \"777\", \"666\"],\n" +
+                "    \"correctAnswer\" : \"правеьный атвет\",\n" +
+                "    \"repeats\" : 2\n" +
+                "  },\n" +
+                "  {\n" +
+                "    \"type\" : \"CheckBoxTask\",\n" +
+                "    \"task\" : \"Выберите верный ответ\",\n" +
+                "    \"answers\" : [\"228\", \"777\", \"666\"],\n" +
+                "    \"correctAnswers\" : [\"правеьный атвет1\", \"правеьный атвет2\", \"правеьный атвет3\", \"правеьный атвет4\"],\n" +
                 "    \"repeats\" : 2\n" +
                 "  }\n" +
                 "]}";
-        RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class).registerSubtype(RadioTask.class);
+        RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class).registerSubtype(RadioTask.class).registerSubtype(CheckBoxTask.class);
         RuntimeTypeAdapterFactory<baseJob> typeFactoryJob = RuntimeTypeAdapterFactory.of(baseJob.class, "type").registerSubtype(learnJob.class);
         Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactoryTask).registerTypeAdapterFactory(typeFactoryJob).create();
         CheckWords.job = g.fromJson(answer, learnJob.class);
