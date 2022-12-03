@@ -26,6 +26,11 @@
     "secondPartTask" : "789",
     "answer" : "456",
     "repeats" : 2
+  },
+  {
+    "type" : "DragAndDropTask",
+    "task" : "123",
+    "repeats" : 2
   }
   ]
 }
