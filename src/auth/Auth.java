@@ -20,6 +20,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.URLDecoder;
+import java.nio.file.Files;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
@@ -55,7 +56,7 @@ public class Auth implements CallableFromScenesManager {
                 prop.load(r);
                 prop.setProperty("username", login.getText());
                 prop.setProperty("password", HashPassword(password.getText()));
-                prop.store(new FileOutputStream(data), null);
+                prop.store(Files.newOutputStream(data.toPath()), null);
             }
             ScenesManager.setScene(Main.primaryStage, Scenes.homePage);
         } else {

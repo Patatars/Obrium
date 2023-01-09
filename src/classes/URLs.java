@@ -7,7 +7,7 @@ public enum URLs {
     GET_ITEMCODE_BY_FULL_NAME("http://cyberes.admin-blog.ru/LNTest/API/getItemCodeByFullName.php"),
     GET_TIME("http://cyberes.admin-blog.ru/LNTest/API/getTime.php");
 
-    String url;
+    final String url;
 
     URLs(String url){
         this.url = url;
