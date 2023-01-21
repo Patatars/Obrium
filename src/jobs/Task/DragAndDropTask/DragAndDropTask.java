@@ -7,16 +7,17 @@ import javafx.geometry.Bounds;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.Border;
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.*;
 import javafx.scene.shape.Circle;
 import jobs.Task.baseTask;
+import sun.nio.ch.ThreadPool;
 
 import java.awt.*;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.*;
 
 public class DragAndDropTask extends baseTask {
 
@@ -26,7 +27,11 @@ public class DragAndDropTask extends baseTask {
     private final transient Label l4;
     private final transient Label l5;
     private final transient Label l6;
-    private final transient AnchorPane a;
+    private final transient VBox anchorPanesContainer;
+    private final transient AnchorPane labelsContainer;
+    private final transient AnchorPane dragArea;
+
+    private final transient List<DragAndDropAnchorPane> anchorPanes = new ArrayList<>();
 
 
     public DragAndDropTask() throws IOException {
@@ -35,7 +40,13 @@ public class DragAndDropTask extends baseTask {
         l4 = (Label) (super.taskPane.lookup("#4"));
         l5 = (Label) (super.taskPane.lookup("#5"));
         l6 = (Label) (super.taskPane.lookup("#6"));
-        a = (AnchorPane) (super.taskPane.lookup("#7"));
+        labelsContainer = (AnchorPane) (taskPane.lookup("#LabelsContainer"));
+        dragArea = (AnchorPane) (taskPane.lookup("#dragArea"));
+        anchorPanes.add(new DragAndDropAnchorPane(l4));
+        anchorPanes.add(new DragAndDropAnchorPane(l5));
+        anchorPanesContainer = (VBox) taskPane.lookup("#anchorPanesContainer");
+        anchorPanes.forEach(dragAndDropAnchorPane -> anchorPanesContainer.getChildren().add(dragAndDropAnchorPane));
+
     }
     final Bounds[] bounds = new Bounds[1];
     @Override
@@ -43,20 +54,23 @@ public class DragAndDropTask extends baseTask {
         super.show(parent, pointsLabel);
 
         l4.setOnMousePressed(mouseEvent -> {
+            labelsContainer.getChildren().remove(l4);
+            dragArea.getChildren().add(l4);
             dragDelta.x = l4.getLayoutX() - mouseEvent.getSceneX();
             dragDelta.y = l4.getLayoutY() - mouseEvent.getSceneY();
             bounds[0] = taskPane.getBoundsInLocal();
-            System.out.println(a.getTranslateX());
         });
-        l4.setOnMouseReleased(mouseEvent -> l4.setCursor(Cursor.HAND));
+
+
+        l4.setOnMouseReleased(mouseEvent -> {
+            l4.setCursor(Cursor.HAND);
+            dragArea.getChildren().remove(l4);
+            labelsContainer.getChildren().add(l4);
+        });
         l4.setOnMouseDragged(mouseEvent -> {
             moveX(l4, mouseEvent.getSceneX());
             moveY(l4, mouseEvent.getSceneY());
-            if(Math.sqrt(Math.pow(l4.getLayoutX() - (a.getLayoutX() + a.getWidth()/2), 2) + Math.pow(l4.getLayoutY() - (a.getLayoutY()+a.getHeight()/2), 2)) <= 10){
 
-            } else {
-                l4.setText("B");
-            }
         });
 
     }

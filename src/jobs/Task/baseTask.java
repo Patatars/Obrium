@@ -64,6 +64,10 @@ public abstract class baseTask {
         pointsLabel.setText("Баллы: " + points + "/" + repeats);
         parent.getChildren().clear();
         parent.getChildren().add(taskPane);
+        AnchorPane.setBottomAnchor(taskPane, 0d);
+        AnchorPane.setTopAnchor(taskPane, 0d);
+        AnchorPane.setLeftAnchor(taskPane, 0d);
+        AnchorPane.setRightAnchor(taskPane, 0d);
     }
 
     protected void initialize(){
