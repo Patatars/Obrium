@@ -50,10 +50,12 @@ public class DragAndDropAnchorPane extends AnchorPane {
         AnchorPane.setTopAnchor(currentLabel, 0d);
         AnchorPane.setRightAnchor(currentLabel, 0d);
     }
-    public void removeLabel(){
+    public void removeLabel(DragAndDropLabel label){
         if (state != States.BUSY) return;
         currentLabel = null;
         state = States.RESTING;
+        AnchorPane.clearConstraints(label);
+
     }
     public boolean isCorrect(){
         return currentLabel == correctLabel;

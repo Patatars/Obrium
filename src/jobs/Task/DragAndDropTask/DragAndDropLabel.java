@@ -1,5 +1,6 @@
 package jobs.Task.DragAndDropTask;
 
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
@@ -23,15 +24,18 @@ public class DragAndDropLabel extends Label {
         this.taskPane = taskPane;
         setFont(new Font(50));
         setTextFill(WHITE);
+        setAlignment(Pos.CENTER);
+        setWrapText(true);
 
         setOnMousePressed(mouseEvent -> {
             if(mouseEvent.isMiddleButtonDown() || mouseEvent.isSecondaryButtonDown()) return;
             if (parentPane != null){
-                parentPane.removeLabel();
+                parentPane.removeLabel(this);
                 parentPane.getChildren().remove(this);
                 labelContainer.getChildren().add(this);
                 parentPane.setActive(false, this);
                 isToHome = true;
+                System.out.println(123);
             }else{
                 labelContainer.getChildren().remove(this);
                 dragArea.getChildren().add(this);
@@ -41,7 +45,7 @@ public class DragAndDropLabel extends Label {
             dragDelta.x = getLayoutX() - mouseEvent.getSceneX();
             dragDelta.y = getLayoutY() - mouseEvent.getSceneY();
         });
-
+        AtomicReference<DragAndDropAnchorPane> nearestPane = new AtomicReference<>();
         setOnMouseReleased(mouseEvent -> {
             if(mouseEvent.isMiddleButtonDown() || mouseEvent.isSecondaryButtonDown() || mouseEvent.isPrimaryButtonDown()) return;
             if(isToHome){
@@ -57,9 +61,10 @@ public class DragAndDropLabel extends Label {
                 dragArea.getChildren().remove(this);
                 labelContainer.getChildren().add(this);
             }
+            nearestPane.set(null);
         });
 
-        AtomicReference<DragAndDropAnchorPane> nearestPane = new AtomicReference<>();
+
         setOnMouseDragged(mouseEvent -> {
             if(mouseEvent.isMiddleButtonDown() || mouseEvent.isSecondaryButtonDown()) return;
             if (isToHome){

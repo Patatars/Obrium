@@ -34,14 +34,13 @@ public class DragAndDropTask extends baseTask {
     public DragAndDropTask() throws IOException {
         super(FXMLLoader.load(Objects.requireNonNull(DragAndDropTask.class.getResource("DragAndDropTask.fxml"))));
 
-
         labelContainer = (VBox) (taskPane.lookup("#LabelContainer"));
         labelContainer1 = (VBox) (taskPane.lookup("#LabelContainer1"));
         ggg = (HBox) (taskPane.lookup("#ggg"));
         ggg1 = (HBox) (taskPane.lookup("#ggg1"));
         labelsContainer = (HBox) (taskPane.lookup("#LabelsContainer"));
         dragArea = (AnchorPane) (taskPane.lookup("#dragArea"));
-        DragAndDropLabel dr = new DragAndDropLabel("ve", dragArea, labelContainer, labelsContainer, anchorPanes, taskPane);
+        DragAndDropLabel dr = new DragAndDropLabel("gr", dragArea, labelContainer, labelsContainer, anchorPanes, taskPane);
         DragAndDropLabel dr1 = new DragAndDropLabel("ve", dragArea, labelContainer1, labelsContainer, anchorPanes, taskPane);
         labelContainer.getChildren().add(dr);
         labelContainer1.getChildren().add(dr1);
