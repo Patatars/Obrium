@@ -13,6 +13,7 @@ import javafx.scene.text.Font;
 import jobs.Task.baseTask;
 
 import java.io.IOException;
+import java.util.Objects;
 
 
 public class TextFieldTask extends baseTask {
@@ -23,13 +24,13 @@ public class TextFieldTask extends baseTask {
     private final transient TextField answerTextField;
 
     public TextFieldTask() throws IOException {
-        super(FXMLLoader.load(TextFieldTask.class.getResource("TextFieldTask.fxml")));
+        super(FXMLLoader.load(Objects.requireNonNull(TextFieldTask.class.getResource("TextFieldTask.fxml"))));
         answerTextField = (TextField) (super.taskPane.lookup("#Answer"));
         answerTextField.setOnAction(this::OnAnswer);
     }
     public void OnAnswer(ActionEvent actionEvent) {
         if(answerTextField.getText().trim().equals("")) return;
-        if(answerTextField.getText().trim().toLowerCase().equals(answer.toLowerCase())){
+        if(answerTextField.getText().trim().equalsIgnoreCase(answer)){
             CorrectAnswer();
         } else {
             WrongAnswer(answerTextField.getText(), answer);

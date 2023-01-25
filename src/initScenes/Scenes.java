@@ -16,7 +16,7 @@ import java.net.URL;
 public enum Scenes {
     auth(915, 510, Auth.class.getResource("auth.fxml")),
     homePage(604, 439, 697 ,534, HomePage.class.getResource("homePage.fxml")),
-    checkWords(1400, 802, 1400,802, CheckWords.class.getResource("CheckWords.fxml")),
+    checkWords(1400, 900, 1400,802, CheckWords.class.getResource("CheckWords.fxml")),
     endScreen(800, 400, EndWindow.class.getResource("EndWindow.fxml")),
     customJobCreator(500, 500, 500, 500, CustomJobCreator.class.getResource("customJobCreator.fxml")),
     customJobResult(500,500,500,500, CustomJobCreator.class.getResource("customJobResults.fxml"));

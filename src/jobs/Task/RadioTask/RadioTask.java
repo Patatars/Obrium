@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class RadioTask extends baseTask {
 
@@ -24,7 +25,7 @@ public class RadioTask extends baseTask {
     private final transient VBox radioContainer;
 
     public RadioTask() throws IOException {
-        super(FXMLLoader.load(RadioTask.class.getResource("RadioTask.fxml")));
+        super(FXMLLoader.load(Objects.requireNonNull(RadioTask.class.getResource("RadioTask.fxml"))));
         radioContainer = (VBox) (super.taskPane.lookup("#radioContainer"));
     }
 

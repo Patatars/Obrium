@@ -19,24 +19,26 @@ public class DragAndDropAnchorPane extends AnchorPane {
     public DragAndDropAnchorPane(Label correctLabel){
         super();
         this.correctLabel = correctLabel;
-        setStyle(getDottedStyle("white"));
-        setMaxHeight(Double.MAX_VALUE);
-        setMaxWidth(Double.MAX_VALUE);
+        setDottedStyle("white");
         setPrefWidth(250);
         setPrefHeight(120);
+        setMaxHeight(USE_PREF_SIZE);
+        setMaxWidth(USE_PREF_SIZE);
+
+
 
     }
-    private String getDottedStyle(String color){
-        return String.format("-fx-background-color: black; -fx-border-color: %s; -fx-border-width: 5; -fx-background-radius: 15; -fx-border-style: segments(10, 15, 15, 15)  line-cap round;", color);
+    public void setDottedStyle(String color){
+        setStyle(String.format("-fx-background-color: black; -fx-border-color: %s; -fx-border-width: 5; -fx-background-radius: 15; -fx-border-style: segments(10, 15, 15, 15)  line-cap round;", color));
     }
     public void setActive(boolean active, DragAndDropLabel currentLabel){
         if (state == States.BUSY) return;
         if (active){
-            setStyle(getDottedStyle("#35008b"));
+            setDottedStyle("#35008b");
             state = States.ACTIVE;
             currentLabel.setParentPane(this);
         } else{
-            setStyle(getDottedStyle("white"));
+            setDottedStyle("white");
             state = States.RESTING;
             currentLabel.setParentPane(null);
         }

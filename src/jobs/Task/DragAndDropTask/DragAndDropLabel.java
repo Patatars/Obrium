@@ -1,12 +1,11 @@
 package jobs.Task.DragAndDropTask;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.List;
@@ -16,26 +15,39 @@ import static javafx.scene.paint.Color.WHITE;
 
 public class DragAndDropLabel extends Label {
     private final Pane taskPane;
+    private final AnchorPane dragArea;
+    private final VBox labelContainer;
     private DragAndDropAnchorPane parentPane;
     private boolean isToHome = false;
 
+
+
+    /**
+     * Конструктор - создание нового объекта с определенными значениями
+     * @param label Текст
+     * @param dragArea AnchorPane, в котором перетаскиваются ноды
+     * @param labelContainer Контейнер для данной label
+     * @param labelsContainer Контейнер для labelContainers
+     * @param anchorPanes Список ячеек
+     * @param taskPane Родитель
+     */
     public DragAndDropLabel(String label, AnchorPane dragArea, VBox labelContainer, HBox labelsContainer, List<DragAndDropAnchorPane> anchorPanes, Pane taskPane){
         super(label);
         this.taskPane = taskPane;
+        this.dragArea = dragArea;
+        this.labelContainer = labelContainer;
         setFont(new Font(50));
         setTextFill(WHITE);
         setAlignment(Pos.CENTER);
         setWrapText(true);
+        setCursor(Cursor.HAND);
+        setStyle("-fx-background-color: #35008b; -fx-border-radius: 10; -fx-border-width: 5; -fx-border-color: black; -fx-background-radius: 20; -fx-padding: 1 5 1 5;");
 
         setOnMousePressed(mouseEvent -> {
             if(mouseEvent.isMiddleButtonDown() || mouseEvent.isSecondaryButtonDown()) return;
             if (parentPane != null){
-                parentPane.removeLabel(this);
-                parentPane.getChildren().remove(this);
-                labelContainer.getChildren().add(this);
-                parentPane.setActive(false, this);
+                RemoveFromAnchorPane();
                 isToHome = true;
-                System.out.println(123);
             }else{
                 labelContainer.getChildren().remove(this);
                 dragArea.getChildren().add(this);
@@ -45,6 +57,8 @@ public class DragAndDropLabel extends Label {
             dragDelta.x = getLayoutX() - mouseEvent.getSceneX();
             dragDelta.y = getLayoutY() - mouseEvent.getSceneY();
         });
+
+
         AtomicReference<DragAndDropAnchorPane> nearestPane = new AtomicReference<>();
         setOnMouseReleased(mouseEvent -> {
             if(mouseEvent.isMiddleButtonDown() || mouseEvent.isSecondaryButtonDown() || mouseEvent.isPrimaryButtonDown()) return;
@@ -52,7 +66,6 @@ public class DragAndDropLabel extends Label {
                 isToHome = false;
                 return;
             }
-            setCursor(Cursor.HAND);
             if (parentPane != null){
                 parentPane.setLabel(this);
                 dragArea.getChildren().remove(this);
@@ -87,7 +100,7 @@ public class DragAndDropLabel extends Label {
         });
     }
     private void moveX(Label node, double cursorLocation){
-        final boolean atRightBorder = node.getLayoutX() >= (taskPane.getWidth() - node.getWidth());
+        final boolean atRightBorder = node.getLayoutX() >= (dragArea.getWidth() - node.getWidth());
         if (atRightBorder){
             if (cursorLocation + dragDelta.x >= node.getLayoutX()) return;
         }
@@ -99,7 +112,7 @@ public class DragAndDropLabel extends Label {
     }
 
     private void moveY(Label node, double cursorLocation){
-        final boolean atBottomBorder = node.getLayoutY() >= (taskPane.getHeight() - node.getHeight());
+        final boolean atBottomBorder = node.getLayoutY() >= (dragArea.getHeight() - node.getHeight());
         if (atBottomBorder){
             if (cursorLocation + dragDelta.y >= node.getLayoutY()) return;
         }
@@ -114,6 +127,14 @@ public class DragAndDropLabel extends Label {
         this.parentPane = parentPane;
     }
 
+    public void RemoveFromAnchorPane(){
+        if(parentPane!=null) {
+            parentPane.removeLabel(this);
+            parentPane.getChildren().remove(this);
+            labelContainer.getChildren().add(this);
+            parentPane.setActive(false, this);
+        }
+    }
 
 
 

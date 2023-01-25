@@ -2,58 +2,75 @@ package jobs.Task.DragAndDropTask;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Bounds;
-import javafx.scene.Cursor;
+import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.input.MouseButton;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import jobs.Task.baseTask;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class DragAndDropTask extends baseTask {
 
-//    private final transient Label l1;
-//    private final transient Label l2;
-//    private final transient Label l3;
 
-    private final transient VBox anchorPanesContainer;
-    private final transient VBox labelContainer;
-    private final transient VBox labelContainer1;
+    private final transient VBox problemsContainer;
     private final transient HBox labelsContainer;
-    private final transient HBox ggg;
-    private final transient HBox ggg1;
+
     private final transient AnchorPane dragArea;
 
     private final transient List<DragAndDropAnchorPane> anchorPanes = new ArrayList<>();
+    private final transient List<DragAndDropLabel> labels = new ArrayList<>();
+
+    public Map<String, String> problems;
 
 
     public DragAndDropTask() throws IOException {
         super(FXMLLoader.load(Objects.requireNonNull(DragAndDropTask.class.getResource("DragAndDropTask.fxml"))));
-
-        labelContainer = (VBox) (taskPane.lookup("#LabelContainer"));
-        labelContainer1 = (VBox) (taskPane.lookup("#LabelContainer1"));
-        ggg = (HBox) (taskPane.lookup("#ggg"));
-        ggg1 = (HBox) (taskPane.lookup("#ggg1"));
-        labelsContainer = (HBox) (taskPane.lookup("#LabelsContainer"));
+        problemsContainer = (VBox) (taskPane.lookup("#problemsContainer"));
         dragArea = (AnchorPane) (taskPane.lookup("#dragArea"));
-        DragAndDropLabel dr = new DragAndDropLabel("gr", dragArea, labelContainer, labelsContainer, anchorPanes, taskPane);
-        DragAndDropLabel dr1 = new DragAndDropLabel("ve", dragArea, labelContainer1, labelsContainer, anchorPanes, taskPane);
-        labelContainer.getChildren().add(dr);
-        labelContainer1.getChildren().add(dr1);
-        anchorPanes.add(new DragAndDropAnchorPane(dr));
-        anchorPanes.add(new DragAndDropAnchorPane(dr1));
-        anchorPanesContainer = (VBox) taskPane.lookup("#anchorPanesContainer");
-        ggg.getChildren().add(anchorPanes.get(0));
-        ggg1.getChildren().add(anchorPanes.get(1));
+        labelsContainer = (HBox) (taskPane.lookup("#LabelsContainer"));
+    }
+
+    @Override
+    protected void initialize() {
+        super.initialize();
+        problems.forEach((label, answer) -> {
+            VBox labelContainer = new VBox();
+            DragAndDropLabel dragAndDropLabel = new DragAndDropLabel(answer, dragArea, labelContainer, labelsContainer, anchorPanes, taskPane);
+            labels.add(dragAndDropLabel);
+            labelContainer.getChildren().add(dragAndDropLabel);
+            labelsContainer.getChildren().add(labelContainer);
+            dragAndDropLabel.setFont(new Font(Math.round(getFontSize(answer.length() / 2))));
+
+            HBox problemContainer = new HBox();
+            problemContainer.setSpacing(50);
+            problemContainer.setAlignment(Pos.CENTER_RIGHT);
+            Label problemLabel = new Label(label);
+            problemLabel.setTextFill(Color.WHITE);
+            problemLabel.setFont(new Font(Math.round(getFontSize(label.length() / 2))));
+            problemContainer.getChildren().add(problemLabel);
+
+            DragAndDropAnchorPane dragAndDropAnchorPane = new DragAndDropAnchorPane(dragAndDropLabel);
+            anchorPanes.add(dragAndDropAnchorPane);
+            problemContainer.getChildren().add(dragAndDropAnchorPane);
+            problemsContainer.getChildren().add(problemContainer);
+        });
     }
 
     @Override
     public void show(Pane parent, Label pointsLabel) {
         super.show(parent, pointsLabel);
+        labels.forEach(DragAndDropLabel::RemoveFromAnchorPane);
+
+
 
     }
 
@@ -63,6 +80,21 @@ public class DragAndDropTask extends baseTask {
 
     @Override
     protected void OnAnswer(ActionEvent actionEvent) {
-
+        final boolean[] correct = {true};
+        anchorPanes.forEach(dragAndDropAnchorPane -> {
+            if (!dragAndDropAnchorPane.isCorrect()) {
+                correct[0] = false;
+            }
+            dragAndDropAnchorPane.setDottedStyle(dragAndDropAnchorPane.isCorrect() ? "green" : "red");
+        });
+        if (correct[0]){
+            CorrectAnswer();
+        } else {
+            final String[] wrongAnswer = {"\n"};
+            problems.forEach((s, s2) -> {
+                wrongAnswer[0]+= s + " - " + s2 + "\n";
+            });
+            WrongAnswer(wrongAnswer[0]);
+        }
     }
 }

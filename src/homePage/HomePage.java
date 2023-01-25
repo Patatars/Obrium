@@ -5,6 +5,11 @@ import checkWords.CheckWords;
 import classes.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.TypeAdapter;
+import com.google.gson.internal.ConstructorConstructor;
+import com.google.gson.internal.bind.MapTypeAdapterFactory;
+import com.google.gson.internal.bind.TypeAdapters;
+import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import initScenes.Scenes;
 import initScenes.ScenesManager;
@@ -31,7 +36,10 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.net.URLDecoder;
+import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -186,10 +194,17 @@ public class HomePage implements CallableFromScenesManager {
             return;
         }
         answer = "{\"version\":1, \"type\": \"learnJob\", \"name\" :  \"228\", \"filename\" :  \"f\", \"item\" :  \"fe\",\"tasks\" :  [\n" +
+                "\n" +
                 "  {\n" +
                 "    \"type\" : \"DragAndDropTask\",\n" +
                 "    \"task\" : \"123\",\n" +
-                "    \"repeats\" : 2\n" +
+                "    \"repeats\" : 2,\n" +
+                "    \"problems\" : {\n" +
+                "      \"Первое задание\" : \"Первый ответ\",\n" +
+                "      \"Второе задание\" : \"Второй ответ\",\n" +
+                "      \"Третье задание\" : \"Третий ответ\",\n" +
+                "      \"Четвёртое задание\" : \"Четвёртый овтет\"\n" +
+                "    }" +
                 "  }\n" +
                 "  ]\n" +
                 "}";
@@ -214,7 +229,7 @@ public class HomePage implements CallableFromScenesManager {
         p.load(new FileReader(data));
         p.setProperty("username", "");
         p.setProperty("password", "");
-        p.store(new FileOutputStream(data), null);
+        p.store(Files.newOutputStream(data.toPath()), null);
         ScenesManager.setScene(Main.primaryStage,Scenes.auth);
     }
 

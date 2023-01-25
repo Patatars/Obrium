@@ -77,19 +77,23 @@ public abstract class baseTask {
         } else {
             shortTask = task;
         }
-        if(letters <= 48){
-            fontSize = 52;
-        } else if(letters <= 96){
-            fontSize = 43;
-        } else if(letters <= 192){
-            fontSize = 29;
-        } else if(letters <= 394){
-            fontSize = 21;
-        } else {
-            fontSize = 35;
-        }
         taskLabel.setText(task);
+        fontSize = getFontSize(letters);
         taskLabel.setFont(new Font(fontSize));
+    }
+
+    protected int getFontSize(int numLetters){
+        if(numLetters <= 48){
+            return  52;
+        } else if(numLetters <= 96){
+            return  43;
+        } else if(numLetters <= 192){
+            return  29;
+        } else if(numLetters <= 394){
+            return  21;
+        } else {
+            return  35;
+        }
     }
 
     protected void MarkCorrectWord(HBox pane , baseTask.State state){
