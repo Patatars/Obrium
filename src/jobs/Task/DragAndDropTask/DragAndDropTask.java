@@ -44,18 +44,18 @@ public class DragAndDropTask extends baseTask {
         super.initialize();
         problems.forEach((label, answer) -> {
             VBox labelContainer = new VBox();
-            DragAndDropLabel dragAndDropLabel = new DragAndDropLabel(answer, dragArea, labelContainer, labelsContainer, anchorPanes, taskPane);
+            DragAndDropLabel dragAndDropLabel = new DragAndDropLabel(answer, dragArea, labelContainer, labelsContainer, anchorPanes);
             labels.add(dragAndDropLabel);
             labelContainer.getChildren().add(dragAndDropLabel);
             labelsContainer.getChildren().add(labelContainer);
-            dragAndDropLabel.setFont(new Font(Math.round(getFontSize(answer.length() / 2))));
+            dragAndDropLabel.setFont(new Font(Math.round(getFontSize(answer.length())/2.5f)));
 
             HBox problemContainer = new HBox();
             problemContainer.setSpacing(50);
             problemContainer.setAlignment(Pos.CENTER_RIGHT);
             Label problemLabel = new Label(label);
             problemLabel.setTextFill(Color.WHITE);
-            problemLabel.setFont(new Font(Math.round(getFontSize(label.length() / 2))));
+            problemLabel.setFont(new Font(Math.round(getFontSize(label.length())/2f)));
             problemContainer.getChildren().add(problemLabel);
 
             DragAndDropAnchorPane dragAndDropAnchorPane = new DragAndDropAnchorPane(dragAndDropLabel);
@@ -69,9 +69,7 @@ public class DragAndDropTask extends baseTask {
     public void show(Pane parent, Label pointsLabel) {
         super.show(parent, pointsLabel);
         labels.forEach(DragAndDropLabel::RemoveFromAnchorPane);
-
-
-
+        anchorPanes.forEach(dragAndDropAnchorPane -> dragAndDropAnchorPane.setDottedStyle("white"));
     }
 
 
@@ -81,6 +79,13 @@ public class DragAndDropTask extends baseTask {
     @Override
     protected void OnAnswer(ActionEvent actionEvent) {
         final boolean[] correct = {true};
+        final boolean[] hasEmpty = {false};
+        anchorPanes.forEach(dragAndDropAnchorPane -> {
+            if(dragAndDropAnchorPane.state != DragAndDropAnchorPane.States.BUSY) {
+                hasEmpty[0] = true;
+            }
+        });
+        if (hasEmpty[0]) return;
         anchorPanes.forEach(dragAndDropAnchorPane -> {
             if (!dragAndDropAnchorPane.isCorrect()) {
                 correct[0] = false;
@@ -90,7 +95,7 @@ public class DragAndDropTask extends baseTask {
         if (correct[0]){
             CorrectAnswer();
         } else {
-            final String[] wrongAnswer = {"\n"};
+            final String[] wrongAnswer = {"\n\n"};
             problems.forEach((s, s2) -> {
                 wrongAnswer[0]+= s + " - " + s2 + "\n";
             });

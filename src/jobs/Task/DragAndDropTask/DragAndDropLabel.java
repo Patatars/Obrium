@@ -1,11 +1,9 @@
 package jobs.Task.DragAndDropTask;
 
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Label;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 import java.util.List;
@@ -14,7 +12,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import static javafx.scene.paint.Color.WHITE;
 
 public class DragAndDropLabel extends Label {
-    private final Pane taskPane;
     private final AnchorPane dragArea;
     private final VBox labelContainer;
     private DragAndDropAnchorPane parentPane;
@@ -29,17 +26,14 @@ public class DragAndDropLabel extends Label {
      * @param labelContainer Контейнер для данной label
      * @param labelsContainer Контейнер для labelContainers
      * @param anchorPanes Список ячеек
-     * @param taskPane Родитель
      */
-    public DragAndDropLabel(String label, AnchorPane dragArea, VBox labelContainer, HBox labelsContainer, List<DragAndDropAnchorPane> anchorPanes, Pane taskPane){
+    public DragAndDropLabel(String label, AnchorPane dragArea, VBox labelContainer, HBox labelsContainer, List<DragAndDropAnchorPane> anchorPanes){
         super(label);
-        this.taskPane = taskPane;
         this.dragArea = dragArea;
         this.labelContainer = labelContainer;
-        setFont(new Font(50));
         setTextFill(WHITE);
         setAlignment(Pos.CENTER);
-        setWrapText(true);
+        setWrapText(false);
         setCursor(Cursor.HAND);
         setStyle("-fx-background-color: #35008b; -fx-border-radius: 10; -fx-border-width: 5; -fx-border-color: black; -fx-background-radius: 20; -fx-padding: 1 5 1 5;");
 

@@ -63,7 +63,7 @@ public class DragAndDropAnchorPane extends AnchorPane {
         return currentLabel == correctLabel;
     }
     public double distanceToLabel(Label currentLabel){
-        return Math.sqrt(Math.pow(currentLabel.getLayoutX() + currentLabel.getWidth()/2 - (getParent().getBoundsInParent().getMaxX() + getWidth()*3/4), 2) + Math.pow(currentLabel.getLayoutY() + currentLabel.getHeight()/2 - (getParent().getBoundsInParent().getMaxY() - getHeight()/2), 2));
+        return Math.sqrt(Math.pow(currentLabel.getLayoutX() + currentLabel.getWidth()/2 - (getBoundsInParent().getMaxX()), 2) + Math.pow(currentLabel.getLayoutY() + currentLabel.getHeight()/2 - (getParent().getBoundsInParent().getMaxY() - getHeight()/2), 2));
     }
 
 }
