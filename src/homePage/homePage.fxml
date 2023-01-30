@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="516.0" prefWidth="658.0" style="-fx-background-color: #282828;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="homePage.HomePage">
+<AnchorPane fx:id="parent" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="516.0" prefWidth="658.0" style="-fx-background-color: #282828;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="homePage.HomePage">
 <Button disable="true" layoutX="50.0" layoutY="116.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="185.0" text="Начать" visible="false" />
 <Button disable="true" layoutX="50.0" layoutY="225.0" mnemonicParsing="false" prefHeight="78.0" prefWidth="185.0" text="Загрузить из файла" visible="false" />
     <TabPane fx:id="TabPane" layoutX="26.0" layoutY="89.0" prefHeight="523.0" prefWidth="670.0" rotateGraphic="true" stylesheets="@../sources/Tab-pane.css" tabClosingPolicy="UNAVAILABLE" tabMaxHeight="25.0" tabMinHeight="10.0" tabMinWidth="20.0" AnchorPane.bottomAnchor="102.0" AnchorPane.leftAnchor="26.0" AnchorPane.rightAnchor="373.0" AnchorPane.topAnchor="89.0" />
    <Button fx:id="button_start" disable="true" layoutX="584.0" layoutY="116.0" mnemonicParsing="false" onAction="#startTest" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 6; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-insets: 0; -fx-background-radius: 8;" text="Начать" textFill="WHITE" AnchorPane.rightAnchor="89.0">
       <effect>
          <Glow level="0.37" />
-      </effect></Button>
+      </effect>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor></Button>
    <Button fx:id="reloadBut" layoutX="584.0" layoutY="224.0" mnemonicParsing="false" onAction="#reloadJobs" prefHeight="55.0" prefWidth="155.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 6; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-insets: 0; -fx-background-radius: 8;" text="Обновить работы" textFill="WHITE" AnchorPane.rightAnchor="89.0">
       <effect>
          <Glow level="0.37" />
       </effect>
+      <cursor>
+         <Cursor fx:constant="HAND" />
+      </cursor>
    </Button>
     <Label fx:id="helloText" alignment="CENTER" graphicTextGap="0.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="89.0" prefWidth="828.0" style="-fx-font-family: Lilita2;" text="Образовательный минимум" textAlignment="CENTER" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
         <textFill>
@@ -48,6 +55,9 @@
             <effect>
                 <Glow level="0.37" />
             </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
         </Button>
     </StackPane>
 

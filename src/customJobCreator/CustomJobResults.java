@@ -2,25 +2,16 @@ package customJobCreator;
 
 import Starters.Main;
 import classes.CallableFromScenesManager;
-import classes.FileData;
 import initScenes.Scenes;
 import initScenes.ScenesManager;
 import javafx.event.ActionEvent;
-import javafx.geometry.Pos;
 import javafx.scene.control.Label;
-import javafx.scene.control.Tooltip;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import jobs.Work.learnWork.learnJob;
+import jobs.Work.baseJob;
 
 import java.io.IOException;
 import java.sql.Time;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Comparator;
 import java.util.Date;
-import java.util.Map;
-import java.util.stream.Stream;
 
 public class CustomJobResults implements CallableFromScenesManager {
     public Label File_Name;
@@ -28,7 +19,7 @@ public class CustomJobResults implements CallableFromScenesManager {
     public Label EndTime;
     public Label DoingTime;
     public javafx.scene.layout.VBox VBox;
-    public static learnJob info;
+    public static baseJob info;
 
     @Override
     public void init(boolean firstShowing) {

@@ -13,6 +13,8 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import jobs.Task.DragAndDropTask.DragAndDropAnchorPane;
+import jobs.Work.baseJob;
 
 import java.util.Collections;
 import java.util.List;
@@ -31,7 +33,7 @@ public abstract class baseTask {
     }
     public transient State state = State.EMPTY;
 
-    public static transient CheckWords controller;
+    public static baseJob controller;
 
     protected final transient Label taskLabel;
     protected transient Pane taskPane;
@@ -119,24 +121,24 @@ public abstract class baseTask {
         Answered();
     }
     protected void WrongAnswer(String answer, String correctAnswer){
+        ShowWrongAnswer(answer.length() > 50 ? answer.substring(0, 50) + "..." : answer, correctAnswer);
+    }
+    protected void WrongAnswer(String correctAnswer){
+        ShowWrongAnswer(null, correctAnswer);
+    }
+    private void ShowWrongAnswer(String answer, String correctAnswer){
+        if(controller.type.equals("controlJob")){
+            mistakes++;
+            state = State.COMPLETE;
+            controller.randomWord();
+            return;
+        }
         Alert a = new Alert(Alert.AlertType.INFORMATION);
         a.initOwner(Main.primaryStage);
         a.getDialogPane().getStylesheets().add("sources/Dialog.css");
-        String contentText = answer.length() > 50 ? answer.substring(0, 50) + "..." : answer;
-        a.setContentText("Ваш ответ: " + contentText);
         a.setTitle("Неверный ответ");
         a.setHeaderText("Правильный ответ: " + correctAnswer);
-        a.showAndWait();
-        points = 0;
-        state = State.INCORRECT;
-        mistakes++;
-        Answered();
-    }protected void WrongAnswer(String correctAnswer){
-        Alert a = new Alert(Alert.AlertType.INFORMATION);
-        a.initOwner(Main.primaryStage);
-        a.getDialogPane().getStylesheets().add("sources/Dialog.css");
-        a.setTitle("Неверный ответ");
-        a.setHeaderText("Правильный ответ: " + correctAnswer);
+        a.setContentText(answer==null ? "" : String.format("Ваш ответ: %s", answer));
         a.showAndWait();
         points = 0;
         state = State.INCORRECT;

@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="TaskContainer" alignment="CENTER" prefHeight="386.0" prefWidth="899.0" spacing="30.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fx:id="TaskContainer" alignment="CENTER" prefHeight="386.0" prefWidth="899.0" spacing="30.0" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1">
    <Label fx:id="Task" alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" text="КИПМШГНУКТИМОЛВАРМШУКГЩРТМОЛАВРПЛОУКАТПАОЛВРПЛДВ" textAlignment="CENTER" textFill="WHITE" wrapText="true">
       <font>
          <Font size="52.0" />
@@ -17,6 +18,9 @@
          <effect>
             <Glow level="0.37" />
          </effect>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
    </StackPane>
 </VBox>

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.*?>
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -20,7 +21,10 @@
 
 
     <StackPane layoutX="311.0" layoutY="463.0" prefHeight="78.0" prefWidth="200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
-        <Button mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="102.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 4; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-insets: 0; -fx-background-radius: 8;" text="Назад" textFill="WHITE" />
+        <Button mnemonicParsing="false" onAction="#back" prefHeight="40.0" prefWidth="102.0" style="-fx-background-color: black; -fx-border-color: linear-gradient(from 38.5714% 51.4286%  to 68.0952% 51.4286% , #975bf2 0.0%,#2549ff 100.0%); -fx-border-width: 4; -fx-border-radius: 4; -fx-font-weight: bold; -fx-background-insets: 0; -fx-background-radius: 8;" text="Назад" textFill="WHITE">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
     </StackPane>
     <VBox layoutX="21.0" layoutY="70.0" prefHeight="669.0" prefWidth="311.0" AnchorPane.bottomAnchor="71.0" AnchorPane.leftAnchor="21.0" AnchorPane.rightAnchor="1044.0" AnchorPane.topAnchor="70.0">
         <ScrollPane fx:id="SB_hist" fitToWidth="true" hbarPolicy="NEVER" maxHeight="1.7976931348623157E308" prefHeight="599.0" prefWidth="517.0" style="-fx-background-color: #131313; -fx-background: #131313; -fx-border-color: black; -fx-border-width: 5; -fx-border-radius: 3;" stylesheets="@../sources/styleForSB.css" VBox.vgrow="ALWAYS">

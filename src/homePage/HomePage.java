@@ -5,11 +5,6 @@ import checkWords.CheckWords;
 import classes.*;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapter;
-import com.google.gson.internal.ConstructorConstructor;
-import com.google.gson.internal.bind.MapTypeAdapterFactory;
-import com.google.gson.internal.bind.TypeAdapters;
-import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import initScenes.Scenes;
 import initScenes.ScenesManager;
@@ -30,16 +25,12 @@ import jobs.Task.RadioTask.RadioTask;
 import jobs.Task.TextFieldTask.TextFieldTask;
 import jobs.Task.baseTask;
 import jobs.Work.baseJob;
-import jobs.Work.learnWork.learnJob;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.lang.reflect.Type;
 import java.net.URLDecoder;
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
@@ -193,7 +184,7 @@ public class HomePage implements CallableFromScenesManager {
         if(answer.contains("ERROR:::")) {
             return;
         }
-        answer = "{\"version\":1, \"type\": \"learnJob\", \"name\" :  \"228\", \"filename\" :  \"f\", \"item\" :  \"fe\",\"tasks\" :  [\n" +
+        answer = "{\"version\":2, \"type\": \"controlJob\", \"name\" :  \"228\", \"filename\" :  \"f\", \"item\" :  \"fe\",\"tasks\" :  [\n" +
                 "\n" +
                 "  {\n" +
                 "    \"type\" : \"DragAndDropTask\",\n" +
@@ -209,9 +200,8 @@ public class HomePage implements CallableFromScenesManager {
                 "  ]\n" +
                 "}";
         RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class).registerSubtype(RadioTask.class).registerSubtype(CheckBoxTask.class).registerSubtype(InsertWordTask.class).registerSubtype(DragAndDropTask.class);
-        RuntimeTypeAdapterFactory<baseJob> typeFactoryJob = RuntimeTypeAdapterFactory.of(baseJob.class, "type").registerSubtype(learnJob.class);
-        Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactoryTask).registerTypeAdapterFactory(typeFactoryJob).create();
-        CheckWords.job = g.fromJson(answer, learnJob.class);
+        Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactoryTask).create();
+        CheckWords.job = g.fromJson(answer, baseJob.class);
         ScenesManager.setScene(Main.primaryStage, Scenes.checkWords);
 
     }

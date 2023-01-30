@@ -34,15 +34,17 @@ public class DragAndDropLabel extends Label {
         setTextFill(WHITE);
         setAlignment(Pos.CENTER);
         setWrapText(false);
-        setCursor(Cursor.HAND);
+        setCursor(Cursor.OPEN_HAND);
         setStyle("-fx-background-color: #35008b; -fx-border-radius: 10; -fx-border-width: 5; -fx-border-color: black; -fx-background-radius: 20; -fx-padding: 1 5 1 5;");
 
         setOnMousePressed(mouseEvent -> {
             if(mouseEvent.isMiddleButtonDown() || mouseEvent.isSecondaryButtonDown()) return;
             if (parentPane != null){
                 RemoveFromAnchorPane();
+                setCursor(Cursor.OPEN_HAND);
                 isToHome = true;
             }else{
+                setCursor(Cursor.CLOSED_HAND);
                 labelContainer.getChildren().remove(this);
                 dragArea.getChildren().add(this);
             }
@@ -64,7 +66,9 @@ public class DragAndDropLabel extends Label {
                 parentPane.setLabel(this);
                 dragArea.getChildren().remove(this);
                 parentPane.getChildren().add(this);
+                setCursor(Cursor.HAND);
             }else{
+                setCursor(Cursor.OPEN_HAND);
                 dragArea.getChildren().remove(this);
                 labelContainer.getChildren().add(this);
             }

@@ -1,4 +1,4 @@
-{"version":1, "type": "learnJob", "name" :  "228", "filename" :  "f", "item" :  "fe","tasks" :  [
+{"version":2, "type": "learnJob", "name" :  "228", "filename" :  "f", "item" :  "fe","tasks" :  [
   {
     "type" : "TextFieldTask",
     "task" : "123",
