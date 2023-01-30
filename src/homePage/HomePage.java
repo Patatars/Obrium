@@ -184,21 +184,6 @@ public class HomePage implements CallableFromScenesManager {
         if(answer.contains("ERROR:::")) {
             return;
         }
-        answer = "{\"version\":2, \"type\": \"controlJob\", \"name\" :  \"228\", \"filename\" :  \"f\", \"item\" :  \"fe\",\"tasks\" :  [\n" +
-                "\n" +
-                "  {\n" +
-                "    \"type\" : \"DragAndDropTask\",\n" +
-                "    \"task\" : \"123\",\n" +
-                "    \"repeats\" : 2,\n" +
-                "    \"problems\" : {\n" +
-                "      \"Если две прямые пересекаются, то какая это теорема\" : \"Теорема герундия па па пап а\",\n" +
-                "      \"Второе задание\" : \"Второй ответ\",\n" +
-                "      \"Третье задание\" : \"Третий ответ\",\n" +
-                "      \"Четвёртое задание\" : \"Четвёртый овтет\"\n" +
-                "    }" +
-                "  }\n" +
-                "  ]\n" +
-                "}";
         RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class).registerSubtype(RadioTask.class).registerSubtype(CheckBoxTask.class).registerSubtype(InsertWordTask.class).registerSubtype(DragAndDropTask.class);
         Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactoryTask).create();
         CheckWords.job = g.fromJson(answer, baseJob.class);
