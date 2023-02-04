@@ -5,13 +5,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import jobs.Task.baseTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class CheckBoxTask extends baseTask {
 
@@ -21,7 +19,7 @@ public class CheckBoxTask extends baseTask {
     private final transient VBox checkBoxContainer;
 
     public CheckBoxTask() throws IOException {
-        super(FXMLLoader.load(CheckBoxTask.class.getResource("CheckBoxTask.fxml")));
+        super(FXMLLoader.load(Objects.requireNonNull(CheckBoxTask.class.getResource("CheckBoxTask.fxml"))));
         checkBoxContainer = (VBox) (super.taskPane.lookup("#checkBoxContainer"));
     }
 
@@ -57,12 +55,18 @@ public class CheckBoxTask extends baseTask {
         checkBoxesList.forEach(checkBoxObrium -> {
             if(checkBoxObrium.isSelected()) isCorrect[0] = checkBoxObrium.isCorrect() && isCorrect[0];
             else isCorrect[0] = isCorrect[0] && !checkBoxObrium.isCorrect();
+            if(checkBoxObrium.isCorrect())checkBoxObrium.setTextFill(Color.GREENYELLOW);
+            else checkBoxObrium.setTextFill(Color.RED);
         });
         if(isCorrect[0]){
             CorrectAnswer();
         } else {
             WrongAnswer(Arrays.toString(correctAnswers));
         }
-        checkBoxesList.forEach(checkBoxObrium -> checkBoxObrium.setSelected(false));
+        checkBoxesList.forEach(checkBoxObrium -> {
+            checkBoxObrium.setSelected(false);
+            checkBoxObrium.setTextFill(Color.BLACK);
+        });
+
     }
 }

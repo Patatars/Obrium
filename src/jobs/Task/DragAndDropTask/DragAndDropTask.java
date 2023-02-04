@@ -13,10 +13,7 @@ import javafx.scene.text.Font;
 import jobs.Task.baseTask;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 
 public class DragAndDropTask extends baseTask {
 
@@ -28,6 +25,8 @@ public class DragAndDropTask extends baseTask {
 
     private final transient List<DragAndDropAnchorPane> anchorPanes = new ArrayList<>();
     private final transient List<DragAndDropLabel> labels = new ArrayList<>();
+    private final transient List<HBox> problemContainers = new ArrayList<>();
+    private final transient List<VBox> labelContainers = new ArrayList<>();
 
     public Map<String, String> problems;
 
@@ -47,7 +46,7 @@ public class DragAndDropTask extends baseTask {
             DragAndDropLabel dragAndDropLabel = new DragAndDropLabel(answer, dragArea, labelContainer, labelsContainer, anchorPanes);
             labels.add(dragAndDropLabel);
             labelContainer.getChildren().add(dragAndDropLabel);
-            labelsContainer.getChildren().add(labelContainer);
+            labelContainers.add(labelContainer);
             dragAndDropLabel.setFont(new Font(Math.round(getFontSize(answer.length())/2.5f)));
 
             HBox problemContainer = new HBox();
@@ -61,8 +60,9 @@ public class DragAndDropTask extends baseTask {
             DragAndDropAnchorPane dragAndDropAnchorPane = new DragAndDropAnchorPane(dragAndDropLabel);
             anchorPanes.add(dragAndDropAnchorPane);
             problemContainer.getChildren().add(dragAndDropAnchorPane);
-            problemsContainer.getChildren().add(problemContainer);
+            problemContainers.add(problemContainer);
         });
+        addLabelAndProblem();
     }
 
     @Override
@@ -70,6 +70,16 @@ public class DragAndDropTask extends baseTask {
         super.show(parent, pointsLabel);
         labels.forEach(DragAndDropLabel::RemoveFromAnchorPane);
         anchorPanes.forEach(dragAndDropAnchorPane -> dragAndDropAnchorPane.setDottedStyle("white"));
+        labelsContainer.getChildren().clear();
+        problemsContainer.getChildren().clear();
+        addLabelAndProblem();
+    }
+
+    private void addLabelAndProblem(){
+        Collections.shuffle(labelContainers);
+        Collections.shuffle(problemContainers);
+        labelContainers.forEach(vBox -> labelsContainer.getChildren().add(vBox));
+        problemContainers.forEach(vBox -> problemsContainer.getChildren().add(vBox));
     }
 
 

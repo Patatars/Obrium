@@ -1,6 +1,9 @@
 package checkWords;
 
 import classes.*;
+import com.google.gson.Gson;
+import customJobCreator.CustomJobResults;
+import endScreen.EndWindow;
 import initScenes.Scenes;
 import initScenes.ScenesManager;
 import javafx.fxml.FXML;
@@ -21,7 +24,6 @@ public class CheckWords implements CallableFromScenesManager {
     private ScrollPane SB_hist;
     @FXML
     private Label Points;
-    public final static Random random = new Random();
     VBox cont = new VBox();
 
     @FXML
@@ -34,7 +36,7 @@ public class CheckWords implements CallableFromScenesManager {
             cont.getChildren().clear();
         }
         baseTask.controller = job;
-        if(!job.init(parent, SB_hist, Points)) {
+        if(!job.init(parent, SB_hist, Points, this)) {
             try {
                 ScenesManager.setScene(Main.primaryStage, Scenes.homePage);
                 Alert a = new Alert(Alert.AlertType.INFORMATION);
@@ -48,6 +50,43 @@ public class CheckWords implements CallableFromScenesManager {
                 throw new RuntimeException(e);
             }
         }
+    }
+
+    public void allCompleted(){
+        try {
+            job.endTime = Long.parseLong(HTTPRequests.postRequest(URLs.GET_TIME.toString(), "", true));
+            if(job.fileName.equals("default") && job.item.equals("default") && job.name.equals("default")){
+                CustomJobResults.info=job;
+                ScenesManager.setScene(Main.primaryStage, Scenes.customJobResult);
+                return;
+            }
+            String ans = HTTPRequests.postRequest(URLs.ALLCOMPLETE_URL.toString(), "username=" + UserData.user.username + "&password=" + UserData.user.password + "&item=" + job.item + "&filename=" + job.fileName + "&mistakes=" + misstakes() + "&startTime=" + job.startTime + "&endTime=" + job.endTime, true);
+            EndWindow.SuccesfulUploaded = !ans.contains("ERROR:::");
+            EndWindow.alertStage = ScenesManager.createAlert("Работа пройдена", Scenes.endScreen);
+            EndWindow.alertStage.setOnCloseRequest(event -> {
+                try {
+                    EndWindow.alertStage.close();
+                    ScenesManager.setScene(Main.primaryStage, Scenes.homePage);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
+            EndWindow.alertStage.initOwner(Main.primaryStage);
+            EndWindow.alertStage.showAndWait();
+        }
+        catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String misstakes(){
+        final String[] misstakes = {"{"};
+        job.tasks.forEach(baseTask -> {
+            misstakes[0]+=String.format("\"%s\":%s,", baseTask.task, baseTask.mistakes);
+        });
+        misstakes[0] = misstakes[0].substring(0, misstakes[0].length()-1);
+        System.out.println(misstakes[0] + "}");
+        return misstakes[0] + "}";
     }
 
     public void back() throws IOException {

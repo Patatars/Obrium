@@ -2,6 +2,7 @@ package jobs.Work;
 
 
 import Starters.Main;
+import checkWords.CheckWords;
 import classes.HTTPRequests;
 import classes.URLs;
 import classes.UserData;
@@ -25,6 +26,7 @@ import jobs.Task.baseTask;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
 
@@ -40,14 +42,17 @@ public class baseJob {
 
     public String type;
 
+    public transient CheckWords controller;
+
     transient AnchorPane parent;
 
     private transient Label points;
     final static Random random = new Random();
     transient VBox cont = new VBox();
-    public boolean init(AnchorPane parent, ScrollPane SB_hist, Label points){
+    public boolean init(AnchorPane parent, ScrollPane SB_hist, Label points, CheckWords controller){
         if (version!=2) return false;
         this.parent = parent;
+        this.controller = controller;
         this.points = points;
         cont.setSpacing(10);
         tasks.forEach(baseTask -> {
@@ -63,33 +68,8 @@ public class baseJob {
 
     public void randomWord(){
         if(allCompleted()){
-            try {
-                Gson gson = new Gson();
-                endTime = Long.parseLong(HTTPRequests.postRequest(URLs.GET_TIME.toString(), "", true));
-                if(fileName.equals("default") && item.equals("default") && name.equals("default")){
-                    CustomJobResults.info=this;
-                    ScenesManager.setScene(Main.primaryStage, Scenes.customJobResult);
-                    return;
-                }
-                String ans = HTTPRequests.postRequest(URLs.ALLCOMPLETE_URL.toString(), "username=" + UserData.user.username + "&password=" + UserData.user.password + "&item=" + item + "&filename=" + fileName + "&mistakes=" + gson.toJson(tasks.get(0)) + "&startTime=" + startTime + "&endTime=" + endTime, true);
-                EndWindow.SuccesfulUploaded = !ans.contains("ERROR:::");
-                EndWindow.alertStage = ScenesManager.createAlert("Работа пройдена", Scenes.endScreen);
-                EndWindow.alertStage.setOnCloseRequest(event -> {
-                    try {
-                        EndWindow.alertStage.close();
-                        ScenesManager.setScene(Main.primaryStage, Scenes.homePage);
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                });
-                EndWindow.alertStage.initOwner(Main.primaryStage);
-                EndWindow.alertStage.showAndWait();
-                return;
-            }
-            catch (IOException e) {
-                e.printStackTrace();
-                return;
-            }
+            controller.allCompleted();
+            return;
         }
         int numWord =random.nextInt(tasks.size());
         while(tasks.get(numWord).state == baseTask.State.COMPLETE) numWord = random.nextInt(tasks.size());

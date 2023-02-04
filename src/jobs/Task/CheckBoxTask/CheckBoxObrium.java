@@ -3,6 +3,8 @@ package jobs.Task.CheckBoxTask;
 import javafx.geometry.Pos;
 import javafx.scene.control.CheckBox;
 import javafx.scene.layout.Region;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.scene.text.Font;
 
 public class CheckBoxObrium extends CheckBox {
@@ -19,4 +21,6 @@ public class CheckBoxObrium extends CheckBox {
     public boolean isCorrect() {
         return isCorrect;
     }
+
+
 }

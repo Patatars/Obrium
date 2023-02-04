@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import jobs.Task.baseTask;
 
 import java.io.IOException;
@@ -47,7 +48,10 @@ public class RadioTask extends baseTask {
         super.show(parent, pointsLabel);
         Collections.shuffle(radioButtonsList);
         radioContainer.getChildren().clear();
-        radioButtonsList.forEach(toggle -> radioContainer.getChildren().add(toggle));
+        radioButtonsList.forEach(toggle -> {
+            radioContainer.getChildren().add(toggle);
+            toggle.setTextFill(Color.BLACK);
+        });
     }
 
     @FXML
@@ -56,9 +60,16 @@ public class RadioTask extends baseTask {
         if(((RadioButtonObrium)radios.getSelectedToggle()).isCorrect()){
             CorrectAnswer();
         } else {
-            WrongAnswer(((RadioButtonObrium) radios.getSelectedToggle()).getText(), answers[0]);
+            radioButtonsList.forEach(radioButtonObrium -> {
+                if(radioButtonObrium.isCorrect()){
+                    radioButtonObrium.setTextFill(Color.GREENYELLOW);
+                }
+            });
+            ((RadioButtonObrium) radios.getSelectedToggle()).setTextFill(Color.RED);
+            WrongAnswer(((RadioButtonObrium) radios.getSelectedToggle()).getText(), correctAnswer);
         }
         radios.getSelectedToggle().setSelected(false);
+
 
     }
 

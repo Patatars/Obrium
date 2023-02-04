@@ -39,7 +39,7 @@ public abstract class baseTask {
     protected transient Pane taskPane;
     protected transient String shortTask;
     protected transient int fontSize = 52;
-    protected transient int mistakes = 0;
+    public transient int mistakes = 0;
     protected transient int points = 0;
     protected transient HBox history;
 
