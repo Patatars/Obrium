@@ -17,8 +17,8 @@
         <option name="msgOutputLevel" value="Quiet" />
         <option name="nativeBundle" value="all" />
         <option name="title" value="Obrium" />
-        <option name="vendor" value="" />
-        <option name="version" value="" />
+        <option name="vendor" value="Cyberes, EC Kudrovo" />
+        <option name="version" value="pre-release 1.9" />
       </options>
     </properties>
     <root id="root">

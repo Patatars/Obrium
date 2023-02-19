@@ -7,9 +7,9 @@ import javafx.scene.text.Font;
 
 public class RadioButtonObrium extends RadioButton {
     private final boolean isCorrect;
-    public RadioButtonObrium(String text, boolean isCorrectRadio){
+    public RadioButtonObrium(String text, boolean isCorrectRadio, double fontSize){
         super(text);
-        setFont(new Font(50));
+        setStyle("-fx-font-size: " + fontSize + ";");
         setPrefHeight(Region.USE_COMPUTED_SIZE);
         setWrapText(true);
         setAlignment(Pos.CENTER);

@@ -30,7 +30,7 @@ public class TextFieldTask extends baseTask {
     }
     public void OnAnswer(ActionEvent actionEvent) {
         if(answerTextField.getText().trim().equals("")) return;
-        if(answerTextField.getText().trim().equalsIgnoreCase(answer)){
+        if(answerTextField.getText().trim().equalsIgnoreCase(answer.trim())){
             CorrectAnswer();
         } else {
             WrongAnswer(answerTextField.getText(), answer);

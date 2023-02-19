@@ -8,7 +8,9 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
 import initScenes.Scenes;
 import initScenes.ScenesManager;
+import javafx.event.ActionEvent;
 import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -46,6 +48,7 @@ public class HomePage implements CallableFromScenesManager {
     public TabPane TabPane;
     public Tab AllJobsPassed = new Tab("Все работы пройдёны");
     public AnchorPane parent;
+    public Button button_start_test;
 
 
     /**
@@ -107,6 +110,7 @@ public class HomePage implements CallableFromScenesManager {
         scrollPane.setContent(vBox);
         vBox.setPrefHeight(80);
 
+
         scrollPaneMap.put(itemCode, scrollPane);
         VBoxMap.put(itemCode, vBox);
         TabMap.put(itemCode, tab);
@@ -149,6 +153,7 @@ public class HomePage implements CallableFromScenesManager {
         AnchorPane ap = (AnchorPane) mouseEvent.getSource();
         if(ap == lastClicked) {
             button_start.disableProperty().setValue(true);
+            button_start_test.disableProperty().setValue(true);
             ap.setStyle(ap.getStyle().replace("-fx-border-color: white; -fx-border-width: 2;", ""));
             lastClicked = null;
             return;
@@ -157,6 +162,7 @@ public class HomePage implements CallableFromScenesManager {
         if(lastClicked == null) {
             lastClicked = ap;
             button_start.disableProperty().setValue(false);
+            button_start_test.disableProperty().setValue(false);
             return;
         }
         lastClicked.setStyle(ap.getStyle().replace("-fx-border-color: white; -fx-border-width: 2;", ""));
@@ -175,10 +181,14 @@ public class HomePage implements CallableFromScenesManager {
         lastClicked.setStyle(lastClicked.getStyle().replace("-fx-border-color: white; -fx-border-width: 2;", ""));
         lastClicked = null;
         button_start.disableProperty().setValue(true);
+        button_start_test.disableProperty().setValue(true);
+
     }
 
+
+
     @FXML
-    public void startTest() throws IOException {
+    public void startTest(ActionEvent event) throws IOException {
         Text t = (Text) lastClicked.getChildren().get(0);
         String answer = HTTPRequests.postRequest(URLs.GETFILE_URL.toString(), "username=" + user.username + "&password=" + user.password + "&filename=" + t.getId() + "&item=" + TabPane.getSelectionModel().getSelectedItem().getId(), true);
         if(answer.contains("ERROR:::")) {
@@ -187,6 +197,9 @@ public class HomePage implements CallableFromScenesManager {
         RuntimeTypeAdapterFactory<baseTask> typeFactoryTask = RuntimeTypeAdapterFactory.of(baseTask.class, "type").registerSubtype(TextFieldTask.class).registerSubtype(RadioTask.class).registerSubtype(CheckBoxTask.class).registerSubtype(InsertWordTask.class).registerSubtype(DragAndDropTask.class);
         Gson g = new GsonBuilder().registerTypeAdapterFactory(typeFactoryTask).create();
         CheckWords.job = g.fromJson(answer, baseJob.class);
+        if(event.getSource() == button_start_test) {
+            CheckWords.job.type = "controlJob";
+        }
         ScenesManager.setScene(Main.primaryStage, Scenes.checkWords);
 
     }

@@ -8,6 +8,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
 import jobs.Task.baseTask;
 
 import java.io.IOException;
@@ -33,13 +34,14 @@ public class RadioTask extends baseTask {
     @Override
     protected void initialize() {
         super.initialize();
-        RadioButtonObrium correctRadioButton = new RadioButtonObrium(correctAnswer, true);
+        RadioButtonObrium correctRadioButton = new RadioButtonObrium(correctAnswer, true, getFontSize(correctAnswer.length())/2d);
         correctRadioButton.setToggleGroup(radios);
         radioButtonsList.add(correctRadioButton);
         for (String answer: answers) {
-            RadioButtonObrium radioButton = new RadioButtonObrium(answer, false);
+            RadioButtonObrium radioButton = new RadioButtonObrium(answer, false, getFontSize(answer.length())/2d);
             radioButton.setToggleGroup(radios);
             radioButtonsList.add(radioButton);
+
         }
     }
 
@@ -49,6 +51,7 @@ public class RadioTask extends baseTask {
         Collections.shuffle(radioButtonsList);
         radioContainer.getChildren().clear();
         radioButtonsList.forEach(toggle -> {
+            toggle.setFont(new Font(1));
             radioContainer.getChildren().add(toggle);
             toggle.setTextFill(Color.BLACK);
         });

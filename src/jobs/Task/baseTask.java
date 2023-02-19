@@ -88,7 +88,7 @@ public abstract class baseTask {
         if(numLetters <= 48){
             return  52;
         } else if(numLetters <= 96){
-            return  43;
+            return  42;
         } else if(numLetters <= 192){
             return  29;
         } else if(numLetters <= 394){
@@ -116,6 +116,11 @@ public abstract class baseTask {
         }
     }
     protected void CorrectAnswer(){
+        if(controller.type.equals("controlJob")){
+            state = State.COMPLETE;
+            Answered();
+            return;
+        }
         points++;
         state = points == repeats ? State.COMPLETE : State.CORRECT;
         Answered();
@@ -130,7 +135,7 @@ public abstract class baseTask {
         if(controller.type.equals("controlJob")){
             mistakes++;
             state = State.COMPLETE;
-            controller.randomWord();
+            Answered();
             return;
         }
         Alert a = new Alert(Alert.AlertType.INFORMATION);
