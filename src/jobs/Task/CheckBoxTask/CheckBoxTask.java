@@ -27,11 +27,12 @@ public class CheckBoxTask extends baseTask {
     protected void initialize() {
         super.initialize();
         for (String correctAnswer : correctAnswers) {
-            CheckBoxObrium checkBoxButton = new CheckBoxObrium(correctAnswer, true);
+            CheckBoxObrium checkBoxButton = new CheckBoxObrium(correctAnswer, true, getFontSize(correctAnswer.length())/2d);
             checkBoxesList.add(checkBoxButton);
         }
         for (String answer: answers) {
-            CheckBoxObrium checkBoxButton = new CheckBoxObrium(answer, false);
+            System.out.println(answer + " " + answer.length());
+            CheckBoxObrium checkBoxButton = new CheckBoxObrium(answer, false, getFontSize(answer.length())/2d);
             checkBoxesList.add(checkBoxButton);
         }
     }

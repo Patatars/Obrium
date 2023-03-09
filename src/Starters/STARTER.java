@@ -11,7 +11,7 @@ import java.lang.reflect.Type;
 import java.util.List;
 
 public class STARTER {
-    public static String VERSION = "pre-release 1.9";
+    public static String VERSION = "pre-release 2.0";
     public static void main(String[] args) {
         System.out.println("version " + VERSION);
         for (String arg: args) {

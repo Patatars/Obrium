@@ -87,7 +87,7 @@ public abstract class baseTask {
     protected int getFontSize(int numLetters){
         if(numLetters <= 48){
             return  52;
-        } else if(numLetters <= 96){
+        } else if(numLetters <= 89){
             return  42;
         } else if(numLetters <= 192){
             return  29;
