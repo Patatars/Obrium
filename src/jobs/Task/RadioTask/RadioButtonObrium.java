@@ -16,6 +16,9 @@ public class RadioButtonObrium extends RadioButton {
         getStylesheets().add("sources/radio.css");
         isCorrect = isCorrectRadio;
     }
+    public void setFontSize(double fontSize){
+        setStyle("-fx-font-size: " + fontSize + ";");
+    }
     public boolean isCorrect() {
         return isCorrect;
     }

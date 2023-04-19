@@ -31,6 +31,7 @@ public class RadioTask extends baseTask {
         radioContainer = (VBox) (super.taskPane.lookup("#radioContainer"));
     }
 
+    double radioObriumFont = 100000;
     @Override
     protected void initialize() {
         super.initialize();
@@ -38,11 +39,15 @@ public class RadioTask extends baseTask {
         correctRadioButton.setToggleGroup(radios);
         radioButtonsList.add(correctRadioButton);
         for (String answer: answers) {
+            if (getFontSize(answer.length())/2d < radioObriumFont) radioObriumFont = getFontSize(answer.length())/2d;
             RadioButtonObrium radioButton = new RadioButtonObrium(answer, false, getFontSize(answer.length())/2d);
             radioButton.setToggleGroup(radios);
             radioButtonsList.add(radioButton);
 
         }
+        radioButtonsList.forEach(radioButtonObrium -> {
+            radioButtonObrium.setFontSize(radioObriumFont);
+        });
     }
 
     @Override

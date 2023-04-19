@@ -82,6 +82,7 @@ public abstract class baseTask {
         taskLabel.setText(task);
         fontSize = getFontSize(letters);
         taskLabel.setFont(new Font(fontSize));
+        System.out.println(letters + " " + fontSize);
     }
 
     protected int getFontSize(int numLetters){
@@ -94,7 +95,7 @@ public abstract class baseTask {
         } else if(numLetters <= 394){
             return  21;
         } else {
-            return  35;
+            return  15;
         }
     }
 
